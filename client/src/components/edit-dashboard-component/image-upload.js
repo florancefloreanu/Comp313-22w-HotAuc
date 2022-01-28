@@ -14,6 +14,7 @@ import "./image-upload.css"
 import axios from "axios"
 import { SERVER_URL } from "../../ConstantValue"
 import { useNavigate } from "react-router-dom"
+import { async } from "@firebase/util"
 
 function ImageUpload() {
 	const userId = useSelector((state) => state.userInfor.user._id)
@@ -22,7 +23,7 @@ function ImageUpload() {
 
 	const [images, setImage] = useState([])
 
-	const [imageUri, setImageUri] = useState("")
+	const [imageUri, setImageUri] = useState(null)
 
 	const [imageUploaded, setImageUploaded] = useState(false)
 
@@ -36,7 +37,7 @@ function ImageUpload() {
 		seller: userId,
 		endTime: "",
 		startingPrice: "",
-		currentPrice:"",
+		currentPrice: "",
 		images: []
 	})
 
@@ -51,10 +52,8 @@ function ImageUpload() {
 		}
 
 		//console.log(imageUri)
-		console.log(userId)
 
-		const imageObj = { images: imageUri }
-		console.log(imageObj)
+		console.log(imageUri)
 		const newItem = {
 			title: item.title,
 			description: item.description,
@@ -64,11 +63,11 @@ function ImageUpload() {
 			endTime: item.endTime,
 			startingPrice: item.startingPrice,
 			currentPrice: item.startingPrice,
-			images: [{ uri:imageUri }]
+			images: imageUri
 		}
 		setItem(newItem)
 		//setItem({ ...item ,currentPrice:item.startingPrice})
-		console.log(item)
+		console.log(newItem)
 
 		//Post item
 		try {
@@ -79,8 +78,7 @@ function ImageUpload() {
 				}
 			}
 			//Set request body
-			console.log(userId)
-			const body = JSON.stringify(item)
+			const body = JSON.stringify(newItem)
 			console.log(body)
 			//Make request
 			const res = await axios.post(`${SERVER_URL}item`, body, config)
@@ -98,19 +96,11 @@ function ImageUpload() {
 
 	const upload = async () => {
 		if (images != null) {
-			console.log(images.length)
-			images.forEach((image) => {
-				const imageRef = ref(storage, `auction/${image.name}`)
-				// 'file' comes from the Blob or File API
-				const snapshot = uploadBytes(imageRef, image).then((snapshot) => {
-					getDownloadURL(imageRef).then((uri) => {
-						const newUri = { uri }
-						setImageUri( uri)
-						console.log(imageUri)
-						setImageUploaded(true)
-					})
-				})
+			//var urls = []
+			images.forEach(async(image) => {
+				await getImageUri(image)
 			})
+			
 
 			// const imageRef = ref(storage, `auction/${images[0].name}`)
 
@@ -120,6 +110,24 @@ function ImageUpload() {
 
 			// imagesRef.put(image).on("state_changed", alert("success"), alert)
 		}
+	}
+
+	const getImageUri = async (image) => {
+		const imageRef = ref(storage, `auction/${image.name}`)
+		// 'file' comes from the Blob or File API
+		var urls = []
+		const snapshot = uploadBytes(imageRef, image).then((snapshot) => {
+			getDownloadURL(imageRef).then((uri) => {
+				urls.push({ uri })
+
+				console.log(urls)
+
+				console.log(imageUri)
+				setImageUri(urls)
+				setImageUploaded(true)
+			})
+		})
+		
 	}
 
 	return (
