@@ -130,6 +130,15 @@ function ImageUpload() {
 		
 	}
 
+	const onTimeChange = (e) => {
+		const endTime = item.endTime.substring(0, item.endTime.indexOf("T")).concat(e.target.value)
+		setItem({ ...item, endTime:endTime })
+	}
+
+	const onDateChange = (e) => {
+		
+	}
+
 	return (
 		<div className="container">
 			<h1 className="large text-primary">Post a new auction item</h1>
@@ -238,15 +247,37 @@ function ImageUpload() {
 						controlId="formHorizontalEndTime"
 					>
 						<Form.Label column sm={2}>
-							End at
+							End date
 						</Form.Label>
 						<Col sm={10}>
 							<Form.Control
 								type="date"
+								placeholder="endDate"
+								name="endDate"
+								value={item.endTime.substring(0, item.endTime.indexOf("T"))}
+								onChange={(e) => onDateChange(e)}
+							/>
+						</Col>
+					</Form.Group>
+
+					<Form.Group
+						as={Row}
+						className="mb-3"
+						controlId="formHorizontalEndDate"
+					>
+						<Form.Label column sm={2}>
+							End time
+						</Form.Label>
+						<Col sm={10}>
+							<Form.Control
+								type="time"
 								placeholder="endTime"
 								name="endTime"
-								value={item.yeaendTimer}
-								onChange={(e) => onInputChange(e)}
+								value={item.endTime.substring(
+									item.endTime.indexOf("T"),
+									item.endTime.length
+								)}
+								onChange={(e) => onTimeChange(e)}
 							/>
 						</Col>
 					</Form.Group>
