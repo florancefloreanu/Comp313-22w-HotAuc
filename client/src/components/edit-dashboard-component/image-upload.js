@@ -91,7 +91,11 @@ function ImageUpload() {
 	}
 
 	const loadImage = (newImage) => {
-		setImage([...images, newImage])
+		if (newImage != null) {
+			console.log("upload image called")
+			setImage([...images, newImage])
+		}
+		
 	}
 
 	const upload = async () => {
