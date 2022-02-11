@@ -7,3 +7,15 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
+.spinner {
+
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    background: #fcfcfc url("http://www.mvgen.com/loader.gif") no-repeat scroll center center / 120px 120px;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
