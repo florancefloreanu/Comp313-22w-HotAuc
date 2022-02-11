@@ -15,5 +15,27 @@ const parseToYYYYMMDD = (time) => {
 	return parsedTime
 }
 
+const calculateTimeLeft = (time) => {
+	if (time === null) {
+		return
+	}
+    let difference = Date.parse(time) - +new Date()
+    console.log(difference)
 
-module.exports = {parseToYYYYMMDD}
+	let timeLeft = {}
+
+	if (difference > 0) {
+		timeLeft = {
+			days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+			hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+			minutes: Math.floor((difference / 1000 / 60) % 60),
+			seconds: Math.floor((difference / 1000) % 60)
+		}
+    }
+    
+    console.log(timeLeft)
+
+	return timeLeft
+}
+
+module.exports = { parseToYYYYMMDD, calculateTimeLeft }
