@@ -49,29 +49,29 @@ function ImageUpload() {
 		setItem({ ...item, [e.target.name]: e.target.value })
 	}
 
-	const handlePostItem = async (e) => {
-		e.preventDefault()
-		if (images.length === 0 || imageUri === null || imageUri.length === 0) {
-			console.log("No image")
-			setAlert(true)
-			setTimeout(() => {
-				setAlert(false)
-			}, 3000)
-		} else {
-			const newItem = {
-				title: item.title,
-				description: item.description,
-				color: item.color,
-				year: item.year,
-				seller: userId,
-				endTime: item.endTime,
-				startingPrice: item.startingPrice,
-				currentPrice: item.startingPrice,
-				images: imageUri
-			}
-			setItem(newItem)
-			//setItem({ ...item ,currentPrice:item.startingPrice})
-			console.log(newItem)
+  const handlePostItem = async (e) => {
+    e.preventDefault();
+    if (images.length === 0 || imageUri === null || imageUri.length === 0) {
+      console.log("No image");
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000);
+    } else {
+      const newItem = {
+        title: item.title,
+        description: item.description,
+        color: item.color,
+        year: item.year,
+        seller: userId,
+        endTime: item.endTime,
+        startingPrice: item.startingPrice,
+        currentPrice: item.startingPrice,
+        images: imageUri,
+      };
+      setItem(newItem);
+      //setItem({ ...item ,currentPrice:item.startingPrice})
+      console.log(newItem);
 
 			//Post item
 			try {
