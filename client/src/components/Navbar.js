@@ -42,6 +42,8 @@ const NavBar = () => {
 			if (res.data.spelling_fix != null) {
 				setSpellFix(res.data.spelling_fix)
 				setSearchCondition(res.data.spelling_fix)
+			} else {
+				setSpellFix(null)
 			}
 		} catch (error) {}
 	}
