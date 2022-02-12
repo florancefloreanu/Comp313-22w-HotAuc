@@ -24,6 +24,7 @@
 		"express": "^4.17.1",
 		"express-validator": "^6.13.0",
 		"fill-range": "^7.0.1",
+		"google-search-results-nodejs": "^2.1.0",
 		"gravatar": "^1.8.2",
 		"i": "^0.3.7",
 		"jsonwebtoken": "^8.5.1",

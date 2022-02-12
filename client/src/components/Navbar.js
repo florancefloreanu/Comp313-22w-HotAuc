@@ -12,6 +12,8 @@ const NavBar = () => {
 
 	const [searchCondition, setSearchCondition] = useState("")
 
+	const [ spellFix,setSpellFix] = useState()
+
 	const items = useSelector((state) => state.item.value)
 	//Set dispatch for Redux
 	const dispatch = useDispatch()
@@ -36,7 +38,11 @@ const NavBar = () => {
 				{ params: { title: searchCondition } },
 				config
 			)
-			dispatch(setSearchResult(res.data))
+			dispatch(setSearchResult(res.data.items))
+			if (res.data.spelling_fix != null) {
+				setSpellFix(res.data.spelling_fix)
+				setSearchCondition(res.data.spelling_fix)
+			}
 		} catch (error) {}
 	}
 
@@ -156,6 +162,12 @@ const NavBar = () => {
 			<Link to="/" className="navbar__title navbar__item">
 				HotAuc
 			</Link>
+			{spellFix != null && (
+				<span>
+					Showing result of
+					<b className="bold-text"> {spellFix} </b>
+				</span>
+			)}
 			<form onSubmit={(e) => handleSearch(e)}>
 				<label htmlFor="header-search">
 					<span className="visually-hidden">Search Items</span>
