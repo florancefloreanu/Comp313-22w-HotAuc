@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Sidebar.css";
 import { components } from "react-select";
 import Select from "react-select";
@@ -7,6 +7,7 @@ import { SERVER_URL } from "../ConstantValue";
 import { Dropdown } from "react-bootstrap";
 
 function Sidebar() {
+  const ref = useRef();
   const [checkedBrands, setCheckedBrands] = useState([]);
   const [checkedYears, setCheckedYears] = useState([]);
   const [showBrands, setShowBrands] = useState(false);
@@ -23,13 +24,35 @@ function Sidebar() {
       prev.push(index);
     }
     setFilter([...prev]);
-    console.log(checked);
   };
 
   useEffect(() => {
     console.log("selected brands: ", checkedBrands);
     console.log("selected years: ", checkedYears);
-  }, [checkedBrands, checkedYears]);
+    const checkIfClickedOutside = (e) => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (showBrands && ref.current && !ref.current.contains(e.target)) {
+        setShowBrands(false);
+      }
+    };
+
+    const checkIfClickedOutside2 = (e) => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (showYears && ref.current && !ref.current.contains(e.target)) {
+        setShowYears(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+    document.addEventListener("mousedown", checkIfClickedOutside2);
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+      document.removeEventListener("mousedown", checkIfClickedOutside2);
+    };
+  }, [checkedBrands, checkedYears, showBrands, showYears]);
 
   const brandOptions = [
     { value: "Mazda", label: "Mazda" },
@@ -74,10 +97,13 @@ function Sidebar() {
   }) => {
     return (
       <div className="spanAcross">
-        <Dropdown show={show}>
+        <Dropdown show={show} ref={ref}>
           <Dropdown.Toggle
+            // onClick={() => {
+            //   setShow(!show);
+            // }}
             onClick={() => {
-              setShow(!show);
+              setShow((oldState) => !oldState);
             }}
           >
             {title}:
@@ -101,36 +127,6 @@ function Sidebar() {
       </div>
     );
   };
-
-  // const brandCheckBox = (props) => {
-  //   return (
-  //     <div>
-  //       <components.Option {...props}>
-  //         <input
-  //           type="checkbox"
-  //           checked={props.isSelected}
-  //           onChange={(e) => handleSelectedBrandChange(e)}
-  //         />{" "}
-  //         <label>{props.label}</label>
-  //       </components.Option>
-  //     </div>
-  //   );
-  // };
-
-  // const yearCheckBox = (props) => {
-  //   return (
-  //     <div>
-  //       <components.Option {...props}>
-  //         <input
-  //           type="checkbox"
-  //           checked={props.isSelected}
-  //           onChange={(e) => handleSelectedBrandChange(e)}
-  //         />{" "}
-  //         <label>{props.label}</label>
-  //       </components.Option>
-  //     </div>
-  //   );
-  // };
 
   return (
     <div className="sidebar">
