@@ -1,4 +1,19 @@
 .sidebar {
-	font-size: large;
-	height: 80%;
+  font-size: large;
+  height: 80%;
+}
+
+.chkbox {
+  margin: 5px;
+  padding: 5px;
+}
+
+.cbLabel {
+  margin-left: 5px;
+}
+
+.scroll {
+  max-height: 350px;
+  width: 200px;
+  overflow: scroll;
 }
