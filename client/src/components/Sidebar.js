@@ -1,58 +1,47 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
 import { components } from "react-select";
 import Select from "react-select";
 import axios from "axios";
 import { SERVER_URL } from "../ConstantValue";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, DropdownButton, Button } from "react-bootstrap";
+import MultiSelect from "react-multiple-select-dropdown-lite";
+import "react-multiple-select-dropdown-lite/dist/index.css";
 
 function Sidebar() {
-  const ref = useRef();
   const [checkedBrands, setCheckedBrands] = useState([]);
   const [checkedYears, setCheckedYears] = useState([]);
-  const [showBrands, setShowBrands] = useState(false);
-  const [showYears, setShowYears] = useState(false);
-  const [checked, setChecked] = useState([]);
-  const handleChecked = (e, index, filter, setFilter) => {
+  const [priceSort, setPriceSort] = useState("");
+  const [isSelected, setIsSelected] = useState(false);
+  const data = {
+    selectedBrands: checkedBrands,
+    selectedYears: checkedYears,
+    sortPrice: priceSort,
+  };
+
+  const handleOnchangeBrands = (val) => {
+    setCheckedBrands(val);
+    console.log(checkedBrands);
+  };
+
+  const handleOnchangeYears = (val) => {
+    setCheckedYears(val);
+    console.log(checkedYears);
+  };
+
+  const clearFilters = (e) => {
     e.preventDefault();
-    console.log("hit", index);
-    let prev = filter;
-    let itemIndex = prev.indexOf(index);
-    if (itemIndex !== -1) {
-      prev.splice(itemIndex, 1);
-    } else {
-      prev.push(index);
-    }
-    setFilter([...prev]);
+    setCheckedBrands([]);
+    setCheckedYears([]);
+    setPriceSort("");
   };
 
   useEffect(() => {
-    console.log("selected brands: ", checkedBrands);
-    console.log("selected years: ", checkedYears);
-    const checkIfClickedOutside = (e) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
-      if (showBrands && ref.current && !ref.current.contains(e.target)) {
-        setShowBrands(false);
-      }
-    };
-
-    const checkIfClickedOutside2 = (e) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
-      if (showYears && ref.current && !ref.current.contains(e.target)) {
-        setShowYears(false);
-      }
-    };
-
-    document.addEventListener("mousedown", checkIfClickedOutside);
-    document.addEventListener("mousedown", checkIfClickedOutside2);
-    return () => {
-      // Cleanup the event listener
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-      document.removeEventListener("mousedown", checkIfClickedOutside2);
-    };
-  }, [checkedBrands, checkedYears, showBrands, showYears]);
+    // console.log("selected brands: ", checkedBrands);
+    // console.log("selected years: ", checkedYears);
+    console.log(data);
+    console.log(priceSort);
+  }, [checkedBrands, checkedYears, data, priceSort]);
 
   const brandOptions = [
     { value: "Mazda", label: "Mazda" },
@@ -87,65 +76,59 @@ function Sidebar() {
     { value: "2022", label: "2022" },
   ];
 
-  const RenderBrands = ({
-    title,
-    options,
-    filter,
-    setFilter,
-    show,
-    setShow,
-  }) => {
-    return (
-      <div className="spanAcross">
-        <Dropdown show={show} ref={ref}>
-          <Dropdown.Toggle
-            // onClick={() => {
-            //   setShow(!show);
-            // }}
-            onClick={() => {
-              setShow((oldState) => !oldState);
-            }}
-          >
-            {title}:
-          </Dropdown.Toggle>
-          <Dropdown.Menu className="scroll">
-            {options.map((item, index) => (
-              <li className="chkbox" key={index}>
-                <input
-                  type="checkbox"
-                  id={`custom-checkbox-${index}`}
-                  checked={filter.includes(item.label)}
-                  onChange={(e) =>
-                    handleChecked(e, item.label, filter, setFilter)
-                  }
-                />
-                <label htmlFor={`custom-checkbox-${index}`}>{item.label}</label>
-              </li>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
-    );
-  };
+  const priceOrder = [{}];
 
   return (
     <div className="sidebar">
-      <RenderBrands
-        title={"Brands"}
+      <h2>Filter</h2>
+      <div className="preview-values">
+        <h4>Brands</h4>
+        {checkedBrands}
+      </div>
+      <MultiSelect
+        className="mselect"
+        onChange={handleOnchangeBrands}
         options={brandOptions}
-        filter={checkedBrands}
-        setFilter={setCheckedBrands}
-        show={showBrands}
-        setShow={setShowBrands}
+        name="checkedBrands"
       />
-      <RenderBrands
-        title={"Years"}
+      <div className="preview-values">
+        <h4>Year Make</h4>
+        {checkedYears}
+      </div>
+      <MultiSelect
+        className="mselect"
+        onChange={handleOnchangeYears}
         options={yearOptions}
-        filter={checkedYears}
-        setFilter={setCheckedYears}
-        show={showYears}
-        setShow={setShowYears}
+        name="checkedYears"
       />
+      <div className="sort">
+        <h4>Sort Price</h4>
+        <label>
+          <input
+            type="radio"
+            value="Ascending"
+            name="gender"
+            onClick={() => {
+              setPriceSort("Ascending");
+            }}
+          />{" "}
+          Ascending
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Descending"
+            name="gender"
+            onClick={() => {
+              setPriceSort("Descending");
+            }}
+          />{" "}
+          Descending
+        </label>
+      </div>
+      <div>
+        <Button className="fillWidth btn">Apply Filter</Button>
+      </div>
     </div>
   );
 }
