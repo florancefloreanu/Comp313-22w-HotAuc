@@ -15,6 +15,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import EditBid from "./components/edit-dashboard-component/edit-bid"
 import EditProfile from "./components/edit-dashboard-component/edit-profile"
 import Item from "./components/item-component/item"
+import Chatbot from "./components/chatbot-component/Chatbot"
+
 
 class App extends React.Component {
 	constructor() {
@@ -35,7 +37,8 @@ class App extends React.Component {
 						<Fragment>
 							<Navbar />
 							<Sidebar className="sidebar" />
-
+							<Chatbot/>
+							
 							<section
 								className="right-container"
 								style={{ minHeight: "900px" }}
