@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Component } from "react";
 import storage from "../../firebase/config";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,7 +10,10 @@ import {
   Form,
   Row,
   Alert,
+  Dropdown,
+  DropdownButton,
 } from "react-bootstrap";
+import Select from "react-select";
 import "./image-upload.css";
 import axios from "axios";
 import { SERVER_URL } from "../../ConstantValue";
@@ -181,6 +184,39 @@ function ImageUpload() {
   // 	return () => clearTimeout(timer)
   // }, [])
 
+  const brandOptions = [
+    { value: "Mazda", label: "Mazda" },
+    { value: "Ford", label: "Ford" },
+    { value: "Porsche", label: "Porsche" },
+    { value: "BMW", label: "BMW" },
+    { value: "Honda", label: "Honda" },
+    { value: "Toyota", label: "Toyota" },
+    { value: "Ferrari", label: "Ferrari" },
+    { value: "Lamborghini", label: "Lamborghini" },
+    { value: "Chevrolet", label: "Chevrolet" },
+  ];
+
+  const yearOptions = [
+    { value: "2000", label: "2000" },
+    { value: "2001", label: "2001" },
+    { value: "2002", label: "2002" },
+    { value: "2003", label: "2003" },
+    { value: "2004", label: "2004" },
+    { value: "2005", label: "2005" },
+    { value: "2006", label: "2006" },
+    { value: "2007", label: "2007" },
+    { value: "2008", label: "2008" },
+    { value: "2009", label: "2009" },
+    { value: "2010", label: "2010" },
+    { value: "2012", label: "2012" },
+    { value: "2017", label: "2017" },
+    { value: "2018", label: "2018" },
+    { value: "2019", label: "2019" },
+    { value: "2020", label: "2020" },
+    { value: "2021", label: "2021" },
+    { value: "2022", label: "2022" },
+  ];
+
   return (
     <div className="container">
       <h1 className="large text-primary">Post a new auction item</h1>
@@ -236,13 +272,18 @@ function ImageUpload() {
               Brand
             </Form.Label>
             <Col sm={10}>
-              <Form.Control
+              <Form.Select name="brand" onChange={(e) => onInputChange(e)}>
+                {brandOptions.map((brand) => {
+                  return <option value={brand.value}>{brand.value}</option>;
+                })}
+              </Form.Select>
+              {/* <Form.Control
                 name="brand"
                 type="text"
                 placeholder="Brand"
                 value={item.brand}
                 onChange={(e) => onInputChange(e)}
-              />
+              /> */}
             </Col>
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -260,13 +301,18 @@ function ImageUpload() {
               Year
             </Form.Label>
             <Col sm={10}>
-              <Form.Control
+              <Form.Select name="year" onChange={(e) => onInputChange(e)}>
+                {yearOptions.map((year) => {
+                  return <option value={year.value}>{year.value}</option>;
+                })}
+              </Form.Select>
+              {/* <Form.Control
                 type="text"
                 placeholder="year"
                 name="year"
                 value={item.year}
                 onChange={(e) => onInputChange(e)}
-              />
+              /> */}
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formHorizontalName">
