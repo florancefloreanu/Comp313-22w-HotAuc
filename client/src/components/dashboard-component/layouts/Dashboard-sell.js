@@ -33,6 +33,8 @@ function DashboardSell() {
 
   return (
     <div className="dashboard-sell">
+      <Link to="/dashboard/bid/edit"> Go to post a new sell</Link>
+
       {items?.map((item) => {
         return (
           <div className="card">
@@ -52,8 +54,6 @@ function DashboardSell() {
           </div>
         );
       })}
-
-      <Link to="/dashboard/bid/edit"> Go to post a new sell</Link>
     </div>
   );
 }
