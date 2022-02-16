@@ -12,7 +12,7 @@ const NavBar = () => {
 
 	const [searchCondition, setSearchCondition] = useState("")
 
-	const [ spellFix,setSpellFix] = useState()
+	const [spellFix, setSpellFix] = useState()
 
 	const items = useSelector((state) => state.item.value)
 	//Set dispatch for Redux
@@ -45,7 +45,9 @@ const NavBar = () => {
 			} else {
 				setSpellFix(null)
 			}
-		} catch (error) {}
+		} catch (error) {
+			console.log(error.message)
+		}
 	}
 
 	const guestLink = (
