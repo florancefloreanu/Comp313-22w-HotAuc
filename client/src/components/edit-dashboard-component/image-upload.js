@@ -277,13 +277,13 @@ function ImageUpload() {
                   return <option value={brand.value}>{brand.value}</option>;
                 })}
               </Form.Select>
-              {/* <Form.Control
+              <Form.Control
                 name="brand"
-                type="text"
+                type="hidden"
                 placeholder="Brand"
                 value={item.brand}
                 onChange={(e) => onInputChange(e)}
-              /> */}
+              />
             </Col>
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -306,13 +306,13 @@ function ImageUpload() {
                   return <option value={year.value}>{year.value}</option>;
                 })}
               </Form.Select>
-              {/* <Form.Control
-                type="text"
+              <Form.Control
+                type="hidden"
                 placeholder="year"
                 name="year"
                 value={item.year}
                 onChange={(e) => onInputChange(e)}
-              /> */}
+              />
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formHorizontalName">
