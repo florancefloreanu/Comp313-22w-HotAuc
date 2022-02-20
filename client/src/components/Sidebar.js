@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSearchResult } from "../redux/features/itemSlice";
 import "./Sidebar.css";
 import { components } from "react-select";
 import Select from "react-select";
@@ -9,14 +11,19 @@ import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 
 function Sidebar() {
+  const dispatch = useDispatch();
   const [checkedBrands, setCheckedBrands] = useState([]);
   const [checkedYears, setCheckedYears] = useState([]);
-  const [priceSort, setPriceSort] = useState("");
-  const [isSelected, setIsSelected] = useState(false);
-  const data = {
-    selectedBrands: checkedBrands,
-    selectedYears: checkedYears,
-    sortPrice: priceSort,
+  const [priceSort, setPriceSort] = useState("asc");
+  // const [conditions, setConditions] = useState({
+  //   brand: checkedBrands,
+  //   year: checkedYears,
+  //   currentPrice: priceSort,
+  // });
+  const filter = {
+    brand: checkedBrands,
+    year: checkedYears,
+    currentPrice: priceSort,
   };
 
   const handleOnchangeBrands = (val) => {
@@ -36,12 +43,40 @@ function Sidebar() {
     setPriceSort("");
   };
 
+  const ApplyFilterBtnOnClick = async (e) => {
+    e.preventDefault();
+    const conditions = {
+      brand: checkedBrands,
+      year: checkedYears,
+      currentPrice: priceSort,
+    };
+    console.log("Filter btn clicked", conditions);
+    try {
+      //Set request header
+      const config = {
+        headers: {
+          "Content-Type": "Application/json",
+        },
+      };
+      console.log("try block conditions: ");
+      const res = await axios.post(
+        `${SERVER_URL}item/all/filter`,
+        conditions,
+        config
+      );
+      dispatch(setSearchResult(res.data));
+      console.log(res);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
     // console.log("selected brands: ", checkedBrands);
     // console.log("selected years: ", checkedYears);
-    console.log(data);
+    console.log(filter);
     console.log(priceSort);
-  }, [checkedBrands, checkedYears, data, priceSort]);
+  }, [checkedBrands, checkedYears, filter, priceSort]);
 
   const brandOptions = [
     { value: "Mazda", label: "Mazda" },
@@ -109,7 +144,7 @@ function Sidebar() {
             value="Ascending"
             name="gender"
             onClick={() => {
-              setPriceSort("Ascending");
+              setPriceSort("asc");
             }}
           />{" "}
           Ascending
@@ -120,14 +155,21 @@ function Sidebar() {
             value="Descending"
             name="gender"
             onClick={() => {
-              setPriceSort("Descending");
+              setPriceSort("desc");
             }}
           />{" "}
           Descending
         </label>
       </div>
       <div>
-        <Button className="fillWidth btn">Apply Filter</Button>
+        <Button
+          className="fillWidth btn"
+          onClick={(e) => {
+            ApplyFilterBtnOnClick(e);
+          }}
+        >
+          Apply Filter
+        </Button>
       </div>
     </div>
   );
