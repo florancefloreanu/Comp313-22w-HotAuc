@@ -38,10 +38,10 @@ function ImageUpload() {
 
   const [item, setItem] = useState({
     title: "",
-    brand: "",
+    brand: "Mazda",
     description: "",
     color: "",
-    year: "",
+    year: "2000",
     seller: userId,
     endTime: "2022-05-01T05:00:00.000+00:00",
     startingPrice: "",
@@ -279,8 +279,8 @@ function ImageUpload() {
               </Form.Select>
               <Form.Control
                 name="brand"
-                type="hidden"
                 placeholder="Brand"
+                type="hidden"
                 value={item.brand}
                 onChange={(e) => onInputChange(e)}
               />
@@ -307,9 +307,9 @@ function ImageUpload() {
                 })}
               </Form.Select>
               <Form.Control
-                type="hidden"
                 placeholder="year"
                 name="year"
+                type="hidden"
                 value={item.year}
                 onChange={(e) => onInputChange(e)}
               />
