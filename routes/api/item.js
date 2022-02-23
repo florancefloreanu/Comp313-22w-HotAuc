@@ -101,11 +101,10 @@ router.get("/search", async (req, res) => {
       spellCheckResult = result["search_information"];
       let spellFix = "";
 
-      if (
-        spellCheckResult["query_displayed"] != spellCheckResult["spelling_fix"]
-      ) {
-        spellFix = spellCheckResult["spelling_fix"];
-        title = spellCheckResult["spelling_fix"];
+      //  If no spell fix
+      if (spellCheckResult["spelling_fix"] != null) {
+        spellFix = spellCheckResult["spelling_fix"]
+				title = spellCheckResult["spelling_fix"]  
       }
       //var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
       try {

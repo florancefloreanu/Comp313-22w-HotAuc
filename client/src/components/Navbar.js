@@ -38,6 +38,7 @@ const NavBar = () => {
 				{ params: { title: searchCondition } },
 				config
 			)
+			console.log(res.data)
 			dispatch(setSearchResult(res.data.items))
 			if (res.data.spelling_fix != null) {
 				setSpellFix(res.data.spelling_fix)
