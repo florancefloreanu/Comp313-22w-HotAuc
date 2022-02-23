@@ -1,4 +1,27 @@
 .sidebar {
-	font-size: large;
-	height: 80%;
+  font-size: large;
+  height: 80%;
+  width: 335px;
+}
+
+.mselect {
+  padding: 5px;
+}
+
+#dropdown-item-button {
+  width: 300px;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+
+label {
+  margin: 7px;
+}
+
+.fillWidth {
+  width: 300px;
+}
+
+.btn {
+  margin: 5px;
 }
