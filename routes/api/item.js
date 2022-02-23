@@ -99,7 +99,7 @@ router.get("/search", async (req, res) => {
     },
     async (result) => {
       spellCheckResult = result["search_information"];
-      let spellFix = "";
+      let spellFix = null
 
       //  If no spell fix
       if (spellCheckResult["spelling_fix"] != null) {
