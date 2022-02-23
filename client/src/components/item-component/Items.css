@@ -134,10 +134,9 @@ h5 {
   margin-top: -80px;
 }
 
-.cards .error {
+.error {
   color: black;
   text-align: center;
   font-size: 20px;
-  display: block;
-  
+  margin: auto;
 }

@@ -38,9 +38,9 @@ const Items = () => {
   }, [dispatch]);
 
   const cards = (
-    <div className="cards">
+    <>
       {items.length >= 1 ? (
-        <>
+        <div className="cards">
           {items.map((item) => {
             return (
               <div className="card">
@@ -67,13 +67,13 @@ const Items = () => {
               </div>
             );
           })}
-        </>
+        </div>
       ) : (
-        <span className="error">
-          Sorry, There Are No Results To Your Filter
-        </span>
+        <div className="error">
+          <p>Sorry, There Are No Results To Your Filter</p>
+        </div>
       )}
-    </div>
+    </>
   );
 
   return <>{!loading && cards}</>;
