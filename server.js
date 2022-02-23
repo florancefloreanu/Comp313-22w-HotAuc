@@ -56,18 +56,6 @@ app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/user", require("./routes/api/user"));
 app.use("/api/item", require("./routes/api/item"));
 
-// Chatbot
-app.use("/api/dialogflow", require('./routes/api/dialogflow'));
-
-// handle cors error
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
-
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

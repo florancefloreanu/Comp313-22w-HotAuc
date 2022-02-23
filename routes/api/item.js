@@ -82,64 +82,67 @@ router.post("/all/filter", async (req, res) => {
 //@desc    Test route
 //@access  Public
 router.get("/search", async (req, res) => {
-	//res.json({message: "Hello item"});
-	//const { title } = req.body
-	var title = req.query.title
+  //res.json({message: "Hello item"});
+  //const { title } = req.body
+  var title = req.query.title;
 
-	//call spell check
+  //call spell check
 
-	const SerpApi = require("google-search-results-nodejs")
-	const search = new SerpApi.GoogleSearch(spellCheckKey)
+  const SerpApi = require("google-search-results-nodejs");
+  const search = new SerpApi.GoogleSearch(spellCheckKey);
 
-	let spellCheckResult
-	search.json(
-		{
-			q: title,
-			location: "Canada"
-		},
-		async(result) => {
-      spellCheckResult = result["search_information"]
-      	let spellFix = ""
+  let spellCheckResult;
+  search.json(
+    {
+      q: title,
+      location: "Canada",
+    },
+    async (result) => {
+      spellCheckResult = result["search_information"];
+      let spellFix = "";
 
-	if (spellCheckResult["query_displayed"] != spellCheckResult["spelling_fix"]) {
-    spellFix = spellCheckResult["spelling_fix"]
-    title = spellCheckResult["spelling_fix"]
-	}
-	//var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-	try {
-		//const items = await AuctionItem.find(condition);
-		const items = await AuctionItem.find({
-			title: { $regex: new RegExp(title), $options: "i" }
-		})
-		const result = {
-			spelling_fix: spellFix,
-			items: items
-		}
-		res.json(result)
-	} catch (err) {
-		console.log(err.message)
-		res.status(500).json({ msg: "Auction Item search error - search title" })
-	}
-		}
-	)
-
-})
+      if (
+        spellCheckResult["query_displayed"] != spellCheckResult["spelling_fix"]
+      ) {
+        spellFix = spellCheckResult["spelling_fix"];
+        title = spellCheckResult["spelling_fix"];
+      }
+      //var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+      try {
+        //const items = await AuctionItem.find(condition);
+        const items = await AuctionItem.find({
+          title: { $regex: new RegExp(title), $options: "i" },
+        });
+        const result = {
+          spelling_fix: spellFix,
+          items: items,
+        };
+        res.json(result);
+      } catch (err) {
+        console.log(err.message);
+        res
+          .status(500)
+          .json({ msg: "Auction Item search error - search title" });
+      }
+    }
+  );
+});
 
 //@route   GET api/item/userid/{id}
 //@desc    Test route
 //@access  Public
 router.get("/userid/:id", async (req, res) => {
-	var userId = req.params.id
-	try {
-		const items = await AuctionItem.find({ seller: { $in: [userId] } })
-		res.json(items)
-	} catch (err) {
-		console.log(err.message)
-		res.status(500).json({
-			msg: "Auction Item search error - items by userid:" + err.message
-		})
-	}
-})
+  var userId = req.params.id;
+  try {
+    const items = await AuctionItem.find({ seller: { $in: [userId] } });
+    res.json(items);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({
+      msg: "Auction Item search error - items by userid:" + err.message,
+    });
+  }
+});
 
 //@route   GET api/item/bidder/{id}
 //@desc    Test route
