@@ -48,12 +48,12 @@ router.post("/all/filter", async (req, res) => {
 
   checkFilterSizes = () => {
     console.log("body request:", request);
-    if (conditions.brand.length == 0 || brand == "") {
+    if (conditions.brand.length == 0 || conditions.brand.brand == "") {
       console.log("brand is empty");
       delete conditions.brand;
       console.log(conditions);
     }
-    if (conditions.year.length == 0 || year == "") {
+    if (conditions.year.length == 0 || conditions.brand.year == "") {
       console.log("year is empty");
       delete conditions.year;
       console.log(conditions);
