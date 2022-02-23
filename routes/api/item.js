@@ -48,12 +48,12 @@ router.post("/all/filter", async (req, res) => {
 
   checkFilterSizes = () => {
     console.log("body request:", request);
-    if (conditions.brand.length == 0 || conditions.brand.brand == "") {
+    if (conditions.brand.length == 0 || conditions.brand == "") {
       console.log("brand is empty");
       delete conditions.brand;
       console.log(conditions);
     }
-    if (conditions.year.length == 0 || conditions.brand.year == "") {
+    if (conditions.year.length == 0 || conditions.year == "") {
       console.log("year is empty");
       delete conditions.year;
       console.log(conditions);
@@ -99,12 +99,12 @@ router.get("/search", async (req, res) => {
     },
     async (result) => {
       spellCheckResult = result["search_information"];
-      let spellFix = null
+      let spellFix = null;
 
       //  If no spell fix
       if (spellCheckResult["spelling_fix"] != null) {
-        spellFix = spellCheckResult["spelling_fix"]
-				title = spellCheckResult["spelling_fix"]  
+        spellFix = spellCheckResult["spelling_fix"];
+        title = spellCheckResult["spelling_fix"];
       }
       //var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
       try {
