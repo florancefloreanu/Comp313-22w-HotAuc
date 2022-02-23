@@ -39,31 +39,40 @@ const Items = () => {
 
   const cards = (
     <div className="cards">
-      {items.map((item) => {
-        return (
-          <div className="card">
-            <Link to={`/item/${item._id}`} className="no-decoration">
-              <div className="card-body">
-                <img
-                  src={
-                    item.images[0]
-                      ? item.images[0].uri
-                      : "https://previews.123rf.com/images/happyvector071/happyvector0711608/happyvector071160800591/62947847-abstract-creative-vector-design-layout-with-text-do-not-exist-.jpg"
-                  }
-                />
+      {items.length >= 1 ? (
+        <>
+          {items.map((item) => {
+            return (
+              <div className="card">
+                <Link to={`/item/${item._id}`} className="no-decoration">
+                  <div className="card-body">
+                    <img
+                      src={
+                        item.images[0]
+                          ? item.images[0].uri
+                          : "https://previews.123rf.com/images/happyvector071/happyvector0711608/happyvector071160800591/62947847-abstract-creative-vector-design-layout-with-text-do-not-exist-.jpg"
+                      }
+                    />
 
-                <p> </p>
-                <h2>{item.title}</h2>
-                <p>Brand: {item.brand}</p>
-                <p>Color: {item.color}</p>
-                <p>Description: {item.description}</p>
-                <p>Year: {item.year}</p>
-                <p>End Time: {item.endTime}</p>
+                    <p> </p>
+                    <h2>{item.title}</h2>
+                    <p>Brand: {item.brand}</p>
+                    <p>Year: {item.year}</p>
+                    <p>Price: {item.currentPrice}</p>
+                    <p>Color: {item.color}</p>
+                    <p>Description: {item.description}</p>
+                    <p>End Time: {item.endTime}</p>
+                  </div>
+                </Link>
               </div>
-            </Link>
-          </div>
-        );
-      })}
+            );
+          })}
+        </>
+      ) : (
+        <span className="error">
+          Sorry, There Are No Results To Your Filter
+        </span>
+      )}
     </div>
   );
 
