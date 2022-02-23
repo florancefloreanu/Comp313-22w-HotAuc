@@ -43,7 +43,9 @@ const NavBar = () => {
 				setSpellFix(res.data.spelling_fix)
 				setSearchCondition(res.data.spelling_fix)
 			}
-		} catch (error) {}
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	const guestLink = (
