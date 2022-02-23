@@ -27,20 +27,13 @@ function Sidebar() {
   };
 
   const handleOnchangeBrands = (val) => {
-    setCheckedBrands(val);
+    setCheckedBrands(val.split(","));
     console.log(checkedBrands);
   };
 
   const handleOnchangeYears = (val) => {
-    setCheckedYears(val);
+    setCheckedYears(val.split(","));
     console.log(checkedYears);
-  };
-
-  const clearFilters = (e) => {
-    e.preventDefault();
-    setCheckedBrands([]);
-    setCheckedYears([]);
-    setPriceSort("");
   };
 
   const ApplyFilterBtnOnClick = async (e) => {
@@ -118,7 +111,6 @@ function Sidebar() {
       <h2>Filter</h2>
       <div className="preview-values">
         <h4>Brands</h4>
-        {checkedBrands}
       </div>
       <MultiSelect
         className="mselect"
@@ -128,7 +120,6 @@ function Sidebar() {
       />
       <div className="preview-values">
         <h4>Year Make</h4>
-        {checkedYears}
       </div>
       <MultiSelect
         className="mselect"
@@ -169,6 +160,17 @@ function Sidebar() {
           }}
         >
           Apply Filter
+        </Button>
+      </div>
+      <div>
+        <Button
+          variant="secondary"
+          className="fillWidth btn"
+          onClick={() => {
+            window.location.reload(false);
+          }}
+        >
+          Clear Filter
         </Button>
       </div>
     </div>
