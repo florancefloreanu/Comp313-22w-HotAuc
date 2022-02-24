@@ -24,6 +24,7 @@ const AuctionItemSchema = new mongoose.Schema({
   year: {
     type: String,
     required: true,
+    default:"2000"
   },
 
   endTime: {
