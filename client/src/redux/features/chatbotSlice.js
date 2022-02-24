@@ -1,22 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 const chatbotSlice = createSlice({
-  name: "message",
-  initialState: {
-    messages: [],
-  },
-  reducers: {
-    saveMessage: (state, action) => {
-      // console.log("!!!!!!!!!!!!!!!!!!Here you are in reducer!" + JSON.stringify(action.payload))
-      let messages = state.messages;
-      messages.push(action.payload);
-      state = {
-        ...state,
-        messages: messages,
-        // messages: state.messages.concat(action.payload)
-      };
+    name: 'message',
+    initialState: {
+        messages: []
     },
-  },
-});
-export const { saveMessage } = chatbotSlice.actions;
-export default chatbotSlice.reducer;
+    reducers: {
+        saveMessage: (state, action) => {
+            let messages = state.messages;
+            messages.push(action.payload)
+            state = {
+                ...state,
+                messages: messages
+                // messages: state.messages.concat(action.payload)
+            }
+        }
+    },
+})
+
+// function saveMessage(data) {
+//     return {
+//         type: SAVE_MESSAGE,
+//         payload: data
+//     }
+// }
+
+
+export const { saveMessage } = chatbotSlice.actions
+export default chatbotSlice.reducer

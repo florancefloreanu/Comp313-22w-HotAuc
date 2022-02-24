@@ -1,167 +1,225 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import "./Chatbot.css";
-import { SERVER_URL } from "../../ConstantValue";
-import { useDispatch, useSelector } from "react-redux";
-import { saveMessage } from "../../redux/features/chatbotSlice";
+import React, { useEffect } from 'react';
+import axios from "axios"
+import "./Chatbot.css"
+import { SERVER_URL } from "../../ConstantValue"
+import { useDispatch, useSelector } from 'react-redux';
+import { saveMessage } from '../../redux/features/chatbotSlice';
+
 
 export default function Chatbot() {
   const dispatch = useDispatch();
-  const reduxMessages = useSelector((state) => state.chatbotMessage.messages);
+  const reduxMessages = useSelector(state => state.chatbotMessage.messages);
+  const BASE_URL = "http://localhost:3000/";
 
   useEffect(() => {
-    eventQuery("welcomeWebsite");
+    eventQuery('welcomeWebsite');
   }, []);
 
   const textQuery = async (userMsgValue) => {
     // handle the message sent from the user
     let message = {
-      from: "user",
+      from: 'user',
       content: {
         // response from DialogFlow has nested text structure
         text: {
-          text: userMsgValue,
-        },
-      },
-    };
+          text: userMsgValue
+        }
+      }
+    }
+
     dispatch(saveMessage(message));
 
     const request = {
-      text: userMsgValue,
-    };
+      text: userMsgValue
+    }
 
     // handle the message sent from the chatbot
     try {
       // send a post request to backend (/textQuery)
-      await axios
-        .post(`${SERVER_URL}dialogflow/textQuery`, request, { mode: "cors" })
-        .then((response) => {
-          const resContent = response.data.fulfillmentMessages[0];
+      await axios.post(`${SERVER_URL}dialogflow/textQuery`, request, { mode: 'cors' }).then((response) => {
+        const resContent = response.data.fulfillmentMessages[0].text.text[0] !== "" ? response.data.fulfillmentMessages[0] : response.data.fulfillmentMessages[1];
 
-          message = {
-            from: "bot",
-            content: resContent,
-          };
-
-          dispatch(saveMessage(message));
-        });
+        message = {
+          from: 'bot',
+          content: resContent
+        }
+        dispatch(saveMessage(message));
+      });
     } catch (error) {
       message = {
-        from: "bot",
+        from: 'bot',
         content: {
-          text: {
-            text: "Error",
-          },
-        },
-      };
+          text: { text: 'Error' }
+        }
+      }
       dispatch(saveMessage(message));
     }
-  };
+  }
 
   const eventQuery = async (eventName) => {
     const request = {
-      event: eventName,
-    };
-
+      event: eventName
+    }
     // handle the message sent from the chatbot
     try {
       // send a post request to backend (/textQuery)
-      await axios
-        .post(`${SERVER_URL}dialogflow/eventQuery`, request, { mode: "cors" })
-        .then((response) => {
-          const resContent = response.data.fulfillmentMessages[0];
+      await axios.post(`${SERVER_URL}dialogflow/eventQuery`, request, { mode: 'cors' }).then((response) => {
+        const resContent = response.data.fulfillmentMessages[0];
 
-          let message = {
-            from: "bot",
-            content: resContent,
-          };
+        let message = {
+          from: 'bot',
+          content: resContent
+        }
 
-          dispatch(saveMessage(message));
-        });
+        dispatch(saveMessage(message));
+      });
     } catch (error) {
       let message = {
-        from: "bot",
+        from: 'bot',
         content: {
-          text: {
-            text: "Error",
-          },
-        },
-      };
+          text: { text: 'Error' }
+        }
+      }
       dispatch(saveMessage(message));
     }
-  };
-
-  const keyPressHandler = (e) => {
-    if (e.key === "Enter") {
-      return alert(e.target.value);
-    }
-  };
-
-  const clickHandler = (e) => {
-    const message = document.getElementById("user-message").value;
-    if (message !== "") {
-      return alert(message);
-    }
-  };
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     textQuery(e.target[0].value);
-    // console.log(e.target[0].value);
-    e.target[0].value = "";
-  };
+    e.target[0].value = '';
+    scrollToBottom();
+  }
 
-  const renderSingleMessage = (message, i) => {
-    console.log(message);
-  };
-
-  const renderMessages = (messages) => {
-    if (messages) {
-      return messages.map((message, i) => {
-        return <div id="i"></div>;
-      });
-    } else {
-      return null;
+  const scrollToBottom = () => {
+    let bubbles = document.getElementsByClassName('chat-content')[0];
+    if (bubbles) {
+      console.log(bubbles.scrollTop);
+      bubbles.scrollTop = bubbles.scrollHeight;
     }
-  };
+  }
 
-  // const scrollToBottom = () => {
-  //     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
-  // }
+  const loadMessage = () => {
+    setTimeout(
+      function () {
+        // hide typing dots
+        let typingDots = document.querySelectorAll('.bubble-message.bot .typing');
+        typingDots[typingDots.length - 1]?.classList.add('d-none');
 
-  return (
-    <div className="d-none chatbot chatbot-box mb-3 mr-2 p-3">
-      <div className="chatbot d-none">
-        Chatbot!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      </div>
+        // display message
+        let msgToDisplay = document.querySelectorAll('.bubble-message.bot .content.d-none');
+        msgToDisplay[msgToDisplay.length - 1]?.classList.remove('d-none');
 
-      {reduxMessages?.map((msg, i) => {
+        // display button links
+        let buttonContainer = document.querySelectorAll('.button-container.d-none');
+        buttonContainer[buttonContainer.length - 1]?.classList.remove('d-none');
+        scrollToBottom();
+      }, 500);
+  }
+
+  const renderMessage = (message) => {
+    let isBot = message.from === 'bot';
+    if (message.content.text !== undefined) {
+      if (isBot) {
         return (
-          <div className="border p-2 m-2" key={i}>
-            {i}
-            <p>{msg.from}</p>
-            <p>{msg.content.text.text}</p>
+          <div className='bubble-container'>
+            <div className='avatar'><i className="fa-solid fa-robot fa-lg"></i></div>
+            <div className='bubble-space-blue bot'>
+              <div className='bubble-space-white bot'></div>
+            </div>
+            <p className='bubble-message text-white bot'>
+              <span className="typing d-block">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+              <span className='content d-none'>
+                {message.content.text.text}
+              </span>
+            </p>
           </div>
         );
-      })}
+      }
+      else {
+        return (
+          <div className='bubble-container'>
+            <p className='ms-auto bubble-message user'>{message.content.text.text}</p>
+            <div className='bubble-space-blue user'>
+              <div className='bubble-space-white user'></div>
+            </div>
+          </div>
+        );
+      }
+    }
+    else if (message.content.payload !== undefined) {
+      return (
+        <>
+          <div className='bubble-container'>
+            <div className='avatar'><i className="fa-solid fa-robot fa-lg"></i></div>
+            <div className='bubble-space-blue bot'>
+              <div className='bubble-space-white bot'></div>
+            </div>
+            <p className='bubble-message text-white bot'>
+              <span className="typing d-block">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+              <span className='content d-none'>{message.content.payload.fields.message.stringValue}</span>
+            </p>
+          </div>
+          <div className='button-container d-none'>
+            <a href={BASE_URL + message.content.payload.fields.url.stringValue} className='link-button'>{message.content.payload.fields.name.stringValue}</a>
+          </div>
+        </>
+      );
+    }
+  }
 
-      <form onSubmit={handleSubmit}>
-        <div className="input-group mt-auto">
-          <input
-            className="flex-grow-1"
-            id="user-message"
-            name="user-message"
-            type="text"
-          />
-          <button
-            className="btn btn-outline-secondary"
-            type="submit"
-            id="button-addon2"
-          >
-            <i className="fa-solid fa-paper-plane"></i>
-          </button>
+  const toggleChatBot = () => {
+    document.getElementsByClassName('chatbot-button')[0]?.classList.toggle('d-none');
+    document.getElementsByClassName('chatbot-box')[0]?.classList.toggle('d-none');
+  }
+
+  return (
+    <>
+      <button className='chatbot chatbot-button rounded-circle' onClick={() => toggleChatBot()}><i className="fa-solid fa-robot fa-2x text-white"></i></button>
+      <div className='chatbot chatbot-box mr-2 d-none'>
+        <div className='px-3 py-2 chat-header'>
+          Hugo
+          <button onClick={() => toggleChatBot()} className='ms-auto fs-5'>&times;</button>
         </div>
-      </form>
-    </div>
-  );
+        <div className='p-3 chat-content'>
+          {reduxMessages?.map((msg) => {
+            return (
+              <>
+                {renderMessage(msg)}
+              </>
+            )
+          })}
+
+          {scrollToBottom()}
+          {loadMessage()}
+
+          <form onSubmit={handleSubmit}>
+            <div className="input-group mt-auto">
+              <input
+                className='flex-grow-1'
+                id='user-message'
+                name='user-message'
+                type="text"
+                required />
+              <button
+                className="btn btn-outline-primary m-0"
+                type="submit"
+                id="button-addon2"
+              >
+                <i className="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  )
 }
