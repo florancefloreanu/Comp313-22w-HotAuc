@@ -9,6 +9,7 @@ import { SERVER_URL } from "../../ConstantValue";
 import axios from "axios";
 import { async } from "@firebase/util";
 import { calculateTimeLeft } from "../../helper/time";
+import "./item.css";
 
 const Item = () => {
   const { id } = useParams();
@@ -19,6 +20,8 @@ const Item = () => {
   const [currentPrice, setCurrentPrice] = useState(0);
 
   const [data, setData] = useState(null);
+  const [images, setImages] = useState([]);
+  const [selectedImg, setSelectedImg] = useState();
 
   const [loading, setLoading] = useState(true);
 
@@ -61,7 +64,9 @@ const Item = () => {
         console.log(res);
 
         setData(res.data);
-
+        setImages(res.data.images);
+        setSelectedImg(res.data.images[0].uri);
+        console.log(images);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -76,7 +81,7 @@ const Item = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft(data.endTime));
-      console.log(timeLeft);
+      //console.log(timeLeft);
     }, 1000);
     //console.log(timeLeft)
 
@@ -88,11 +93,35 @@ const Item = () => {
       <div className="home">
         <h1>{!loading && data.title}</h1>
         <div className="stuff">
-          <img
-            class="image"
-            src={!loading && data.images[0].uri}
-            alt="Random Img"
-          />
+          <div className="App">
+            <div className="container">
+              <img src={selectedImg} alt="Selected" className="selected" />
+              <div className="imgContainer">
+                {images.map((img, index) => (
+                  <img
+                    className="unselected"
+                    style={{
+                      border:
+                        selectedImg === img.uri
+                          ? "4px solid #0d6efd"
+                          : "4px solid #6c757d",
+                    }}
+                    key={index}
+                    src={!loading && img.uri}
+                    alt={"car " + index}
+                    onClick={() => setSelectedImg(img.uri)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* {images.map((image, key) => {
+            return (
+              <img class="image" src={!loading && image.uri} alt="Random Img" />
+            );
+          })} */}
+
           <p class="text">Brand: {!loading && data.brand}</p>
           <p class="text">Year Make: {!loading && data.year}</p>
           <p class="text">Current Price: ${!loading && data.currentPrice}</p>
