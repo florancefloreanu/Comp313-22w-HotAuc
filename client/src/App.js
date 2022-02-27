@@ -16,6 +16,7 @@ import EditBid from "./components/edit-dashboard-component/edit-bid";
 import EditProfile from "./components/edit-dashboard-component/edit-profile";
 import Item from "./components/item-component/item";
 import Chatbot from "./components/chatbot-component/Chatbot";
+import { LocalUser } from "./components/LocalUser";
 
 class App extends React.Component {
   constructor() {
@@ -31,32 +32,41 @@ class App extends React.Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <Fragment>
-            <Navbar />
-            <Sidebar className="sidebar" />
-            <Chatbot />
-            <section className="right-container" style={{ minHeight: "900px" }}>
-              <Routes>
-                <Route exact path="/" element={<Items />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route exact path="/api/auth/register" element={<Register />} />
-                <Route
-                  path="dashboard/profile/edit"
-                  element={<EditProfile />}
-                />
-                <Route path="dashboard/bid/edit" element={<EditBid />} />
-                <Route path="/item/:id" element={<Item />} />
+			<Provider store={store}>
+				<Router>
+					<LocalUser>
+						<Fragment>
+							<Navbar />
+							<Sidebar className="sidebar" />
+							<Chatbot />
+							<section
+								className="right-container"
+								style={{ minHeight: "900px" }}
+							>
+								<Routes>
+									<Route exact path="/" element={<Items />} />
+									<Route path="/dashboard" element={<Dashboard />} />
+									<Route
+										exact
+										path="/api/auth/register"
+										element={<Register />}
+									/>
+									<Route
+										path="dashboard/profile/edit"
+										element={<EditProfile />}
+									/>
+									<Route path="dashboard/bid/edit" element={<EditBid />} />
+									<Route path="/item/:id" element={<Item />} />
 
-                <Route exact path="/api/auth/login" element={<Login />} />
-              </Routes>
-            </section>
-            <Footer />
-          </Fragment>
-        </Router>
-      </Provider>
-    );
+									<Route exact path="/api/auth/login" element={<Login />} />
+								</Routes>
+							</section>
+							<Footer />
+						</Fragment>
+					</LocalUser>
+				</Router>
+			</Provider>
+		)
   }
 }
 
