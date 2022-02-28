@@ -60,10 +60,10 @@ const NavBar = () => {
 
 	const guestLink = (
 		<>
-			<Link to="/api/auth/login" className="navbar__item">
+			<Link to="/login" className="navbar__item">
 				Login
 			</Link>
-			<Link to="/api/auth/register" className="navbar__item">
+			<Link to="/register" className="navbar__item">
 				Register
 			</Link>
 		</>
