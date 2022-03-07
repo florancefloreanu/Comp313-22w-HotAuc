@@ -12,7 +12,10 @@ export default function Chatbot() {
   const BASE_URL = "http://localhost:3000/";
 
   useEffect(() => {
-    eventQuery('welcomeWebsite');
+    if (reduxMessages.length < 1) {
+
+      eventQuery('welcomeWebsite');
+    }
   }, []);
 
   const textQuery = async (userMsgValue) => {
@@ -37,8 +40,7 @@ export default function Chatbot() {
     try {
       // send a post request to backend (/textQuery)
       await axios.post(`${SERVER_URL}dialogflow/textQuery`, request, { mode: 'cors' }).then((response) => {
-        const resContent = response.data.fulfillmentMessages[0].text.text[0] !== "" ? response.data.fulfillmentMessages[0] : response.data.fulfillmentMessages[1];
-
+        const resContent = 'payload' in response.data.fulfillmentMessages[0] || response.data.fulfillmentMessages[0].text.text[0] !== "" ? response.data.fulfillmentMessages[0] : response.data.fulfillmentMessages[1];
         message = {
           from: 'bot',
           content: resContent
@@ -85,18 +87,28 @@ export default function Chatbot() {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    textQuery(e.target[0].value);
-    e.target[0].value = '';
+    if (typeof(e) === 'string') {
+      const messageBox = document.getElementById('user-message');
+      textQuery(e);
+      messageBox.value = '';
+    }
+    else {
+      e.preventDefault();
+      textQuery(e.target[0].value);
+      e.target[0].value = '';
+    }
     scrollToBottom();
   }
 
   const scrollToBottom = () => {
     let bubbles = document.getElementsByClassName('chat-content')[0];
     if (bubbles) {
-      console.log(bubbles.scrollTop);
       bubbles.scrollTop = bubbles.scrollHeight;
     }
+  }
+
+  const sendQuestion = (message) => {
+    handleSubmit(message);
   }
 
   const loadMessage = () => {
@@ -169,7 +181,22 @@ export default function Chatbot() {
             </p>
           </div>
           <div className='button-container d-none'>
-            <a href={BASE_URL + message.content.payload.fields.url.stringValue} className='link-button'>{message.content.payload.fields.name.stringValue}</a>
+            {'stringValue' in message.content.payload.fields.name ?
+              (<a href={BASE_URL + message.content.payload.fields.url.stringValue} className='link-button'>
+                {message.content.payload.fields.name.stringValue}
+              </a>)
+              :
+              (message.content.payload.fields.name.listValue.values?.map((el) => {
+                return (
+                  <span className='link-button me-2 mb-2 small' onClick={() => sendQuestion(el.stringValue)}>
+                    {el.stringValue}
+                  </span>
+                )
+              }))
+            }
+
+
+
           </div>
         </>
       );
@@ -184,7 +211,7 @@ export default function Chatbot() {
   return (
     <>
       <button className='chatbot chatbot-button rounded-circle' onClick={() => toggleChatBot()}><i className="fa-solid fa-robot fa-2x text-white"></i></button>
-      <div className='chatbot chatbot-box mr-2 d-none'>
+      <div className='chatbot chatbot-box mr-2 d-none shadow-lg'>
         <div className='px-3 py-2 chat-header'>
           Hugo
           <button onClick={() => toggleChatBot()} className='ms-auto fs-5'>&times;</button>
@@ -201,7 +228,7 @@ export default function Chatbot() {
           {scrollToBottom()}
           {loadMessage()}
 
-          <form onSubmit={handleSubmit}>
+          <form className='shadow-lg' onSubmit={handleSubmit}>
             <div className="input-group mt-auto">
               <input
                 className='flex-grow-1'

@@ -16,6 +16,7 @@ import EditBid from "./components/edit-dashboard-component/edit-bid";
 import EditProfile from "./components/edit-dashboard-component/edit-profile";
 import Item from "./components/item-component/item";
 import Chatbot from "./components/chatbot-component/Chatbot";
+import Contact from "./components/contact-component/Contact";
 
 class App extends React.Component {
   constructor() {
@@ -50,6 +51,7 @@ class App extends React.Component {
                 <Route path="/item/:id" element={<Item />} />
 
                 <Route exact path="/api/auth/login" element={<Login />} />
+                <Route path="/contact" element={<Contact />} />
               </Routes>
             </section>
             <Footer />

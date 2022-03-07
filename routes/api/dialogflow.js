@@ -43,9 +43,10 @@ router.post("/textQuery", async (req, res) => {
     const result = responses[0].queryResult;
     console.log(`  Query: ${result.queryText}`);
     console.log(`  Response: ${result.fulfillmentText}`);
-    console.log((`Data: ${JSON.stringify(result.fulfillmentMessages[1])}`));
+    // console.log((`Data: ${JSON.stringify(result.fulfillmentMessages)}`));
+    console.log((`Result: ${JSON.stringify(responses[0].queryResult)}`));
     if (result.intent) {
-        console.log(`  Intent: ${result.intent.displayName}`);
+        // console.log(`  Intent: ${JSON.stringify(result.intent)}`);
     } else {
         console.log(`  No intent matched.`);
     }

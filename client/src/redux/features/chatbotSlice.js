@@ -8,22 +8,21 @@ const chatbotSlice = createSlice({
     reducers: {
         saveMessage: (state, action) => {
             let messages = state.messages;
-            messages.push(action.payload)
-            state = {
-                ...state,
-                messages: messages
-                // messages: state.messages.concat(action.payload)
+                if (messages.length < 0 || messages[messages.length - 1]?.from !== action.payload.from) {
+
+                    messages.push(action.payload)
+                    state = {
+                        ...state,
+                        messages: messages
+                    }
+                }
+            else {
+
             }
+            
         }
     },
 })
-
-// function saveMessage(data) {
-//     return {
-//         type: SAVE_MESSAGE,
-//         payload: data
-//     }
-// }
 
 
 export const { saveMessage } = chatbotSlice.actions
