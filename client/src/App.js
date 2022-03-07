@@ -20,6 +20,10 @@ import { LocalUser } from "./components/LocalUser"
 import { PrivateRoute } from "./PrivateRoute"
 import NoSidebar from "./components/NoSidebar"
 import ShowSidebar from "./components/ShowSidebar"
+import socketClient from "socket.io-client"
+import OneSignal from "react-onesignal"
+
+const appId = "5d1f1b0a-5f01-4823-9796-7ccc768f8393"
 
 function App() {
 	const [sideBarVisibility, setSideBarVisibility] = useState({
@@ -31,6 +35,7 @@ function App() {
 
 	const sidebarDisplay = useSelector((state) => state.layout.value.sidebar)
 
+
 	useEffect(() => {
 		console.log(sidebarDisplay)
 		if (sidebarDisplay) {
@@ -41,6 +46,16 @@ function App() {
 			setMainContainerMargin({ marginLeft: "50px" })
 		}
 	}, [sidebarDisplay])
+
+	//Set oneSignal
+	const [initialized, setInitialized] = useState(false)
+	OneSignal.init({ appId: appId }).then(async() => {
+		setInitialized(true)
+		OneSignal.showSlidedownPrompt().then(() => {
+			// do other stuff
+		})
+
+	})
 	return (
 		<Router>
 			<LocalUser>

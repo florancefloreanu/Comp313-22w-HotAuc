@@ -27,7 +27,6 @@ const Items = () => {
         const res = await axios.get(`${SERVER_URL}item/all`, config);
 
         dispatch(setSearchResult(res.data));
-        console.log(res.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
