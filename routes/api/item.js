@@ -27,6 +27,40 @@ router.get("/all", async (req, res) => {
   }
 });
 
+//@route   GET api/item/all/getbrandcount
+//@desc    Test route
+//@access  Public
+router.get("/all/getbrandcount", async (req, res) => {
+  //instantiate an object to pass to charts
+  var brandData = { brandList: [], brandCount: [] };
+
+  try {
+    //find all the brand names
+    const brandNames = await AuctionItem.find().distinct("brand");
+
+    //store all the brand names into the brandlist property of the object
+    brandData.brandList = brandNames;
+
+    //for loop to get the count of each brand names store in the database
+    for (i = 0; i < brandNames.length; i++) {
+      console.log(brandNames[i]);
+      const brandNamesCount = await AuctionItem.find({
+        brand: { $in: brandNames[i] },
+      }).count();
+      console.log("Brand: " + brandNames[i] + " Count: " + brandNamesCount);
+
+      //store the count of the specific brand name in the brandcount property of the object that's to be passed.
+      brandData.brandCount.push(brandNamesCount);
+    }
+
+    //return the object
+    res.json(brandData);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ msg: "Auction Item search error - getbrandcount" });
+  }
+});
+
 //@route   GET api/item/all
 //@desc    Test route
 //@access  Public
