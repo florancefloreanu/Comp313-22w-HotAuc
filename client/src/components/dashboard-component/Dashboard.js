@@ -4,6 +4,7 @@ import { Button, ButtonGroup } from "react-bootstrap"
 import DashboardProfile from "./layouts/Dashboard-profile"
 import DashboardSell from "./layouts/Dashboard-sell"
 import DashboardBid from "./layouts/Dashboard-bid"
+import DashboardWin from "./layouts/Dashboard-win"
 
 function Dashboard(props) {
 	const [selectedSection, setSelectedSection] = useState("profile")
@@ -19,9 +20,15 @@ function Dashboard(props) {
 	const handleBidSelection = () => {
 		setSelectedSection("bid")
 	}
+
+	const handleWinSelection = () => {
+		setSelectedSection("win")
+	}
+
 	const profile = <DashboardProfile />
 	const sell = <DashboardSell />
 	const bid = <DashboardBid />
+	const win = <DashboardWin />
 
 	return (
 		<Fragment>
@@ -36,12 +43,17 @@ function Dashboard(props) {
 					<Button variant="primary" onClick={handleBidSelection}>
 						Bid
 					</Button>
+					<Button variant="primary" onClick={handleWinSelection}>
+						Win
+					</Button>
 				</ButtonGroup>
 			</div>
 			<div>
 				{(selectedSection === "profile" && profile) ||
 					(selectedSection === "sell" && sell) ||
-					(selectedSection === "bid" && bid)}
+					(selectedSection === "bid" && bid) ||
+					(selectedSection === "win" && win)}
+					
 			</div>
 		</Fragment>
 	)
