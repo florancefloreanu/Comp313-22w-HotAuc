@@ -271,4 +271,16 @@ router.put("/:itemId/user/:userId", async (req, res) => {
   }
 });
 
+router.get("/:userId/winning/", async(req, res) => {
+  try {
+    const userId = req.params.userId
+    const items = await AuctionItem.find({ "bids.bidder": { $in: [userId] } })
+    items.filter((item) => {
+      item.endTime
+    })
+  } catch (err) {
+     res.status(500).json({msg:err.message})
+  }
+})
+
 module.exports = router;

@@ -7,6 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import { SERVER_URL } from "../../../ConstantValue";
 import axios from "axios";
+import Moment from "react-moment";
 
 function DashboardSell() {
   const userId = useSelector((state) => state.userInfor.user._id);
@@ -37,22 +38,31 @@ function DashboardSell() {
 
       {items?.map((item) => {
         return (
-          <div className="card">
-            <div className="card-body">
-              {item.images.map((prop) => (
-                <img src={item.images[0].uri} alt="hotwheels image" />
-              ))}
-              <p> </p>
-              <h2>{item.title}</h2>
-              <p>Brand: {item.brand}</p>
-              <p>Color: {item.color}</p>
-              <p>Description: {item.description}</p>
-              <p>Year: {item.year}</p>
-              <p>Current Price: {item.currentPrice}</p>
-              <p>End Time: {item.endTime}</p>
-            </div>
-          </div>
-        );
+					<div className="card">
+						<div className="card-body">
+							{item.images.map((prop) => (
+								<img src={item.images[0].uri} alt="hotwheels image" />
+							))}
+							<p> </p>
+							<h2>{item.title}</h2>
+							<p>Brand: {item.brand}</p>
+							<p>Color: {item.color}</p>
+							<p>Description: {item.description}</p>
+							<p>Year: {item.year}</p>
+							<p>Current Price: {item.currentPrice}</p>
+							<p class="text">
+								End Date:
+								{
+									<Moment format="YYYY-MM-DD">{item.endTime}</Moment>
+								}
+							</p>
+							<p class="text">
+								End Time:
+								{ <Moment format="HH:mm">{item.endTime}</Moment>}
+							</p>
+						</div>
+					</div>
+				)
       })}
     </div>
   );
