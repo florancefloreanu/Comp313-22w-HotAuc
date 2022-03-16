@@ -47,6 +47,10 @@ const AuctionItemSchema = new mongoose.Schema(
 				}
 			}
 		],
+		isPaid: {
+			type: Boolean,
+			default:false
+		},
 		bids: [
 			{
 				price: {
