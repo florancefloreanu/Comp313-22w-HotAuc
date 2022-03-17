@@ -32,20 +32,16 @@ const Item = () => {
 
   const handleSubmitPrice = async (e) => {
     e.preventDefault();
-    let body;
-
     if (price <= data.currentPrice) {
       setIsAlert(true)
       setTimeout(() => {
 				setIsAlert(false)
-			}, 3000)
-	  const currentPrice = data.currentPrice;
-	  body = { currentPrice };
+	  }, 3000)
+		return
     }
-	else{
-      body = { price }
-    }
+	
 
+    const body = { price };
     const config = {
       headers: {
         "Content-Type": "Application/json",
