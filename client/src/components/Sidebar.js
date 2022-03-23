@@ -81,6 +81,7 @@ function Sidebar() {
     { value: "Ferrari", label: "Ferrari" },
     { value: "Lamborghini", label: "Lamborghini" },
     { value: "Chevrolet", label: "Chevrolet" },
+    { value: "Dodge", label: "Dodge" },
   ];
 
   const yearOptions = [
