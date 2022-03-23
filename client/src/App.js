@@ -70,7 +70,7 @@ function App() {
           <Chatbot />
           <section
             className="right-container"
-            style={{ minHeight: "900px", mainContainerMargin }}
+            style={({ minHeight: "900px" }, mainContainerMargin)}
           >
             <Routes>
               <Route
