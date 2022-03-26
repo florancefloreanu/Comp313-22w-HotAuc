@@ -3,15 +3,14 @@ import { useDispatch } from "react-redux";
 import Chart from "chart.js/auto";
 import axios from "axios";
 import { SERVER_URL } from "../../ConstantValue";
-import { Bar, Pie } from "react-chartjs-2";
-import "./BrandPieChart.css";
+import { Bar, Pie, Line } from "react-chartjs-2";
+import "./chart.css";
 
-const PieChart = () => {
+const BrandPieChart = () => {
   //value for all the list of brands that has count > 1
   const [brandList, setBrandList] = useState([]);
   //corresponding count for brandlist
   const [brandCount, setBrandCount] = useState([]);
-  const itemName = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"];
 
   const loadData = async () => {
     try {
@@ -39,9 +38,8 @@ const PieChart = () => {
   }, []);
 
   return (
-    <div className="pie-chart">
+    <div className="chart">
       <Pie
-        className="pie"
         height={400}
         width={600}
         options={{
@@ -67,6 +65,10 @@ const PieChart = () => {
                 "rgba(75, 192, 192, 0.2)",
                 "rgba(153, 102, 255, 0.2)",
                 "rgba(255, 159, 64, 0.2)",
+                "rgba(146, 47, 98, 0.2)",
+                "rgba(57, 46, 192, 0.2)",
+                "rgba(67, 109, 107, 0.2)",
+                "rgba(86, 182, 67, 0.2)",
               ],
               borderColor: [
                 "rgba(255, 99, 132, 1)",
@@ -75,6 +77,10 @@ const PieChart = () => {
                 "rgba(75, 192, 192, 1)",
                 "rgba(153, 102, 255, 1)",
                 "rgba(255, 159, 64, 1)",
+                "rgba(146, 47, 98, 1)",
+                "rgba(57, 46, 192, 1)",
+                "rgba(67, 109, 107, 1)",
+                "rgba(86, 182, 67, 1)",
               ],
               borderWidth: 1,
             },
@@ -85,4 +91,4 @@ const PieChart = () => {
   );
 };
 
-export default PieChart;
+export default BrandPieChart;
