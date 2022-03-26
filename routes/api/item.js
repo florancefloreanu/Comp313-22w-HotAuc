@@ -3,6 +3,7 @@ const router = express.Router();
 //Middleware
 const auth = require("../../middleware/auth");
 const AuctionItem = require("../../models/auction_item");
+const User = require("../../models/user");
 
 //Get current date
 const currentDate = new Date().toJSON().slice(0, 10);
@@ -24,6 +25,110 @@ router.get("/all", async (req, res) => {
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ msg: "Auction Item search error - all" });
+  }
+});
+
+//@route   GET api/item/all/monthly-registered-users
+//@desc    Test route
+//@access  Public
+router.get("/all/monthly-registered-users", async (req, res) => {
+  //get current month & Date
+  const date = new Date();
+  const currentMonth = date.getMonth();
+  const currentYear = date.getFullYear();
+  const MonthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  //object to be sent to the frontend
+  var monthlyData = {
+    //since js date is 0-based we need to add + 1 to get the proper month
+    currentMonth: [],
+    monthlyRegistrations: [],
+  };
+  try {
+    //for loop to go through each month up until the current month
+    for (i = 0; i <= currentMonth; i++) {
+      //find the number of items registered monthly
+      const items = await User.find({
+        createdAt: {
+          $gte: new Date(currentYear, "0" + i, 01),
+          $lte: new Date(currentYear, "0" + i, 32),
+        },
+      }).count();
+      monthlyData.currentMonth.push(MonthNames[i]);
+      //add the items to the property monthly registrations of monthly data object
+      monthlyData.monthlyRegistrations.push(items);
+    }
+
+    //send the data
+    res.json(monthlyData);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ msg: "Search Monthly Registered users - error" });
+  }
+});
+
+//@route   GET api/item/all/monthly-posted-items
+//@desc    Test route
+//@access  Public
+router.get("/all/monthly-items-posted", async (req, res) => {
+  //get current month & Date
+  const date = new Date();
+  const currentMonth = date.getMonth();
+  const currentYear = date.getFullYear();
+  const MonthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  //object to be sent to the frontend
+  var monthlyData = {
+    //since js date is 0-based we need to add + 1 to get the proper month
+    currentMonth: [],
+    monthlyItemsPosted: [],
+  };
+  try {
+    //for loop to go through each month up until the current month
+    for (i = 0; i <= currentMonth; i++) {
+      //find the number of items registered monthly
+      const items = await AuctionItem.find({
+        createdAt: {
+          $gte: new Date(currentYear, "0" + i, 01),
+          $lte: new Date(currentYear, "0" + i, 32),
+        },
+      }).count();
+      monthlyData.currentMonth.push(MonthNames[i]);
+      //add the items to the property monthly registrations of monthly data object
+      monthlyData.monthlyItemsPosted.push(items);
+    }
+
+    //send the data
+    res.json(monthlyData);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ msg: "Search Monthly Registered users - error" });
   }
 });
 
