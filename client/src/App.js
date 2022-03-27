@@ -23,7 +23,8 @@ import ShowSidebar from "./components/ShowSidebar";
 import AdminDashboard from "./components/admin-component/AdminDashboard";
 import BrandPieChart from "./components/admin-component/BrandPieChart";
 import OneSignal from "react-onesignal";
-
+import UserRegistrationLineChart from "./components/admin-component/UserRegistrationLineChart";
+import MonthlyItemsPostedBarChart from "./components/admin-component/MonthlyItemsPostedBarChart";
 const appId = "5d1f1b0a-5f01-4823-9796-7ccc768f8393";
 
 function App() {
@@ -152,6 +153,22 @@ function App() {
                 element={
                   <NoSidebar>
                     <BrandPieChart />
+                  </NoSidebar>
+                }
+              ></Route>
+              <Route
+                path="/admin/user-registrations-linechart"
+                element={
+                  <NoSidebar>
+                    <UserRegistrationLineChart />
+                  </NoSidebar>
+                }
+              ></Route>
+              <Route
+                path="/admin/monthly-itemposting-barchart"
+                element={
+                  <NoSidebar>
+                    <MonthlyItemsPostedBarChart />
                   </NoSidebar>
                 }
               ></Route>
