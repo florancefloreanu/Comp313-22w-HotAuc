@@ -1,15 +1,15 @@
-import React, { useState, Fragment } from "react"
+import React, { useState, Fragment, useEffect } from "react"
 import { Link } from "react-router-dom"
 import "./Navbar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { setSearchResult } from "../redux/features/itemSlice"
 import { SERVER_URL } from "../ConstantValue"
 import axios from "axios"
+import { setLogout } from "../redux/features/userInforSlice"
 
 const NavBar = () => {
 	// const value = useContext(UserContext)
 	const value = useSelector((state) => state.userInfor.user?.email)
-
 	const [searchCondition, setSearchCondition] = useState("")
 
 	const [spellFix, setSpellFix] = useState()
@@ -43,7 +43,6 @@ const NavBar = () => {
 			if (res.data.spelling_fix != null) {
 				setSpellFix(res.data.spelling_fix)
 
-
 				setTimeout(() => {
 					setSpellFix(null)
 				}, 3000)
@@ -55,12 +54,16 @@ const NavBar = () => {
 		}
 	}
 
+	const handleLogout = (e) => {
+		dispatch(setLogout())
+	}
+
 	const guestLink = (
 		<>
-			<Link to="/api/auth/login" className="navbar__item">
+			<Link to="/login" className="navbar__item">
 				Login
 			</Link>
-			<Link to="/api/auth/register" className="navbar__item">
+			<Link to="/register" className="navbar__item">
 				Register
 			</Link>
 		</>
@@ -68,7 +71,7 @@ const NavBar = () => {
 
 	const authLink = (
 		<>
-			<Link to="/" className="navbar__item" onClick="Logout">
+			<Link to="/" className="navbar__item" onClick={(e) => handleLogout(e)}>
 				Logout
 			</Link>
 
