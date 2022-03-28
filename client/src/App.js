@@ -67,7 +67,6 @@ function App() {
           <div style={sideBarVisibility}>
             <Sidebar className="sidebar" />
           </div>
-
           <Chatbot />
           <section
             className="right-container"

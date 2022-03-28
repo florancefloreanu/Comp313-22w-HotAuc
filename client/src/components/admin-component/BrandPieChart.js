@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Chart from "chart.js/auto";
+// import Chart from "chart.js/auto";
 import axios from "axios";
 import { SERVER_URL } from "../../ConstantValue";
 import { Bar, Pie, Line } from "react-chartjs-2";

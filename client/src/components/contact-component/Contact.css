@@ -1,0 +1,23 @@
+section.right-container {
+    background-color: transparent;
+}
+
+.contact-container {
+    margin-bottom: 200px !important;
+}
+
+#contact-form {
+    width: 50%;
+}
+
+@media only screen and (max-width: 1700px) {
+    #contact-form {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    #contact-form {
+        width: 100%;
+    }
+}
