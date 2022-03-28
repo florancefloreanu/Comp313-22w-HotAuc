@@ -9,7 +9,7 @@ export default function Contact() {
   }
 
   return (
-    <div className='d-flex p-4 m-4 h-100 bg-white shadow'>
+    <div className='contact-container d-flex p-4 m-4 w-50 mx-auto bg-white shadow'>
       <div className='px-5 text-center'>
         <i className="pt-5 fa-solid fa-envelopes-bulk fa-6x text-secondary"></i>
         <h2 className='mt-5 mb-3'>Contact us</h2>
