@@ -36,7 +36,8 @@
     "negotiator": "^0.6.2",
     "npm": "^8.3.0",
     "react-bootstrap": "^2.0.2",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.1.6",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "chai": "^4.3.4",

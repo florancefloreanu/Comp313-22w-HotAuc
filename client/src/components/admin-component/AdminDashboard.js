@@ -1,8 +1,10 @@
+import { Button } from 'bootstrap'
 import React from 'react'
+
 
 function AdminDashboard() {
   return (
-    <div>AdminDashboard</div>
+    <div>Admin Dashboard</div>
   )
 }
 
