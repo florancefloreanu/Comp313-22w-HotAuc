@@ -60,10 +60,12 @@ function Register() {
 						</Form.Text>
 					</Form.Group>
 
+
 					<Form.Group className="mb-3" controlId="formBasicPassword">
 						<Form.Label>Password</Form.Label>
 						<Form.Control type="password" placeholder="Password" value={RegistUserState.password} onChange={passwordOnChangeHandler} />
 					</Form.Group>
+					
 					<Form.Group className="d-flex">
 						<Button variant="primary" type="button" onClick={() => dispatch(register(RegistUserState))}>
 							Submit
