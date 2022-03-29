@@ -48,6 +48,7 @@ function Dashboard(props) {
 					</Button>
 				</ButtonGroup>
 			</div>
+			
 			<div>
 				{(selectedSection === "profile" && profile) ||
 					(selectedSection === "sell" && sell) ||
