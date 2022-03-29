@@ -11,7 +11,7 @@ const AuctionItem = require("../../models/auction_item")
 //@access  Public
 router.get("/users", async (req, res) => {
 	try {
-		const user = await Item.find().select("-password")
+		const user = await User.find().select("-password")
 		res.json(user)
 	} catch (err) {
 		console.log(err.message)
