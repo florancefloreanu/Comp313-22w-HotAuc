@@ -7,7 +7,7 @@ import {
 	Route,
 	Routes
 } from "react-router-dom"
-import"./Admin.css"
+import "./Admin.css"
 
 function AdminDashboard() {
 	return (

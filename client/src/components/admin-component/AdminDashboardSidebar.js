@@ -31,11 +31,11 @@ const AdminDashboardSidebar = () => {
 			<CDBSidebar textColor="#fff" backgroundColor="#0275d8">
 				<CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
 					<a
-						href="/"
+						href="/admin/dashboard/home"
 						className="text-decoration-none"
 						style={{ color: "inherit" }}
 					>
-						Home Page
+						Dashboard
 					</a>
 				</CDBSidebarHeader>
 
@@ -54,16 +54,6 @@ const AdminDashboardSidebar = () => {
 							activeClassName="activeClicked"
 						>
 							<CDBSidebarMenuItem icon="th-large">Items</CDBSidebarMenuItem>
-						</NavLink>
-
-						<NavLink
-							exact
-							to="/admin/dashboard/items"
-							activeClassName="activeClicked"
-						>
-							<CDBSidebarMenuItem icon="chart-line">
-								Item Brand
-							</CDBSidebarMenuItem>
 						</NavLink>
 
 						<NavLink

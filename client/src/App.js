@@ -29,6 +29,7 @@ import AdminAllUsers from "./components/admin-component/users/AdminAllUsers"
 import EditUser from "./components/admin-component/users/EditUser"
 import AdminAllItems from "./components/admin-component/items/AdminAllItems"
 import EditItem from "./components/admin-component/items/EditItem"
+import AdminDashboardHome from "./components/admin-component/AdminDashboardHome"
 const appId = "5d1f1b0a-5f01-4823-9796-7ccc768f8393"
 
 function App() {
@@ -151,6 +152,7 @@ function App() {
 									</NoSidebar>
 								}
 							>
+								<Route path="home" element={<AdminDashboardHome />} />
 								<Route path="users" element={<AdminAllUsers />} />
 								<Route
 									path="users/edit/:userId"

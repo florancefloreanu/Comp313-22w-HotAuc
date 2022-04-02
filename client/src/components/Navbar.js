@@ -87,7 +87,7 @@ const NavBar = () => {
 				Logout
 			</Link>
 
-			<Link to="/admin/dashboard" className="navbar__item">
+			<Link to="/admin/dashboard/home" className="navbar__item">
 				Admin Dashboard
 			</Link>
 		</>
