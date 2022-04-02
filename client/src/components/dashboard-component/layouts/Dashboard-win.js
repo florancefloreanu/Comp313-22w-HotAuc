@@ -5,12 +5,16 @@ import Moment from "react-moment"
 import axios from "axios"
 import { SERVER_URL } from "../../../ConstantValue"
 
+import Paypal from '../../paypal-component/Paypal';
+
 function DashboardWin() {
 	const userId = useSelector((state) => state.userInfor.user._id)
 	//Set dispatch for Redux
 	const [items, setItems] = useState([])
 
 	const [loading, setLoading] = useState(true)
+
+	// const [payResult, setPayResult] = useState()
 
 	useEffect(() => {
 		const fetchItems = async () => {
@@ -31,6 +35,40 @@ function DashboardWin() {
 
 		fetchItems()
 	}, [])
+
+	// useEffect(() => {
+	// 	console.log("Bob, do something!");
+	// }, [payResult])
+
+	const handlePaypal = (resultBool, resultRes) => {
+		if (resultBool === true) {
+			console.log("Good");
+		} else {
+			console.log("Bad");
+		}
+		if (resultRes) console.log(resultRes);
+		window.location.reload();
+	}
+
+	const testOnlyCancelPayment = async (item) => {
+        let newItem = item;
+        newItem.isPaid = false;
+
+        const body = newItem;
+        const config = {
+            headers: {
+                "Content-Type": "Application/json",
+            },
+        };
+
+        const res = await axios.put(
+            `${SERVER_URL}item/${newItem._id}`,
+            body,
+            config
+        );
+
+		console.log("Reset done")
+	}
 
 	const page = (
 		<div className="dashboard-bid">
@@ -65,9 +103,18 @@ function DashboardWin() {
 							<br />
 							<p>Final Price: {item.currentPrice}</p>
 								<Moment parse="YYYY-MM-DD">{item.endTime}</Moment>
-
-
-                            {/* Here Paypal API */}
+							
+							{item.isPaid && (
+								<p>Paid: This item is paid!</p>
+							)}
+							{!item.isPaid && (
+								<Paypal
+									targetItem={!loading && item}
+									subTotal={!loading && item.currentPrice}
+									onPaymentDone={handlePaypal}
+									/>
+							)}
+							<button onClick={() => {testOnlyCancelPayment(item)}}>Reset4Test</button>
 						</div>
 					</div>
 				)
