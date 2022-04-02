@@ -23,6 +23,7 @@ export const login = createAsyncThunk(
 			localStorage.setItem("token", response.data.token)
 			localStorage.setItem("name", response.data.user.name)
 			localStorage.setItem("_id", response.data.user._id)
+			localStorage.setItem("role", response.data.user.role)
 			return response
 		} catch (err) {
 			console.log(err)
@@ -46,10 +47,11 @@ export const register = createAsyncThunk(
 		if (response.status !== 200) {
 			return thunkAPI.rejectWithValue(response)
 		}
-			localStorage.setItem("email", response.data.user.email)
-			localStorage.setItem("token", response.data.token)
-			localStorage.setItem("name", response.data.user.name)
-			localStorage.setItem("_id", response.data.user._id)
+		localStorage.setItem("email", response.data.user.email)
+		localStorage.setItem("token", response.data.token)
+		localStorage.setItem("name", response.data.user.name)
+		localStorage.setItem("_id", response.data.user._id)
+		localStorage.setItem("role", response.data.user.role)
 
 		return response
 	}

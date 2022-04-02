@@ -8,6 +8,7 @@ export const LocalUser = ({ children }) => {
 	const localToken = localStorage.getItem("token")
 	const localId = localStorage.getItem("_id")
 	const localName = localStorage.getItem("name")
+	const localRole = localStorage.getItem("role")
 	const reduxEmail = useSelector((state) => state.userInfor.user?.email)
 
 	if (reduxEmail == null && localEmail != null) {
@@ -15,13 +16,13 @@ export const LocalUser = ({ children }) => {
 			user: {
 				email: localEmail,
 				_id: localId,
-				name: localName
+				name: localName,
+				role: localRole
 			},
 			token: localToken
-        }
+		}
 		dispatch(setlocalUser(payload))
 	}
-
 
 	return children
 }

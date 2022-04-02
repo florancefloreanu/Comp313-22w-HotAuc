@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const { check, validationResult } = require("express-validator")
 
-
 const User = require("../../models/user")
 
 //Config .env
@@ -110,7 +109,7 @@ router.post(
 			}
 
 			const isMatch = await bcrypt.compare(password, user.password)
-          
+
 			if (!isMatch) {
 				return res
 					.status(400)
@@ -129,7 +128,8 @@ router.post(
 				const respondUser = {
 					_id: user._id,
 					email: user.email,
-					name: user.name
+					name: user.name,
+					role: user.role
 				}
 				return res.json({ user: respondUser, token })
 			} catch (err) {

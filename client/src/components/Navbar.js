@@ -10,6 +10,7 @@ import { setLogout } from "../redux/features/userInforSlice"
 const NavBar = () => {
 	// const value = useContext(UserContext)
 	const value = useSelector((state) => state.userInfor.user?.email)
+	const role = useSelector((state) => state.userInfor.user?.role)
 	const [searchCondition, setSearchCondition] = useState("")
 
 	const [spellFix, setSpellFix] = useState()
@@ -69,7 +70,7 @@ const NavBar = () => {
 		</>
 	)
 
-	const authLink = (
+	const userLink = (
 		<>
 			<Link to="/" className="navbar__item" onClick={(e) => handleLogout(e)}>
 				Logout
@@ -80,94 +81,17 @@ const NavBar = () => {
 			</Link>
 		</>
 	)
+	const adminLink = (
+		<>
+			<Link to="/" className="navbar__item" onClick={(e) => handleLogout(e)}>
+				Logout
+			</Link>
 
-	//   if (value.user["email"]) {
-	//     return (
-	// 			<header className="navbar">
-	// 				<Link to="/" className="navbar__title navbar__item">
-	// 					HotAuc
-	// 				</Link>
-	// 				<form onSubmit={(e) => handleSerch(e)}>
-	// 					<label htmlFor="header-search">
-	// 						<span className="visually-hidden">Search Items</span>
-	// 					</label>
-	// 					<input
-	// 						type="text"
-	// 						id="header-search"
-	// 						placeholder="Search items"
-	//             name="s"
-	//             value={searchCondition}
-	// 						onChange={(e) => onSearchConditionChange(e)}
-	// 					/>
-	// 					<button type="submit">Search</button>
-	// 				</form>
-	// 				<Link to="/" className="navbar__item">
-	// 					Home
-	// 				</Link>
-	// 				<div to="" className="navbar__item">
-	// 					Hello, {value.user["email"]}{" "}
-	// 				</div>
-	// 				<Link to="/" className="navbar__item">
-	// 					Contact Us
-	// 				</Link>
-	// 				<Link to="/" className="navbar__item" onClick={e=>logout()}>
-	// 					Logout
-	// 				</Link>
-	// 			</header>
-	// 		)
-	//   } else {
-	//     return (
-	//       <header className="navbar">
-	//         <Link to="/" className="navbar__title navbar__item">
-	//           HotAuc
-	//         </Link>
-	//         <form action="/" method="get">
-	//           <label htmlFor="header-search">
-	//             <span className="visually-hidden">Search Items</span>
-	//           </label>
-	//           <input
-	//             type="text"
-	//             id="header-search"
-	//             placeholder="Search Items"
-	//             name="s"
-	//           />
-	//           <button type="submit">Search</button>
-	//         </form>
-	//         <Link to="/" className="navbar__item">
-	//           Home
-	//         </Link>
-
-	//         <Link to="/api/auth/login" className="navbar__item">
-	//           Login
-	//         </Link>
-	//         <Link to="/api/auth/register" className="navbar__item">
-	//           Register
-	//         </Link>
-	//         <Link onClick={()=>{window.scrollTo(0,document.body.scrollHeight)}} to="/#bottom" className="navbar__item">
-	//           Contact Us
-	//         </Link>
-	//       </header>
-	//     );
-	//   }
-	// };
-
-	// const logout = () => {
-	//   const navigate = useNavigate();
-	//   const appContext = useContext(UserContext);
-	//   appContext.setUserContext({
-	//     user: {},
-	//     token: "",
-	//   });
-	//   navigate("/");
-	// };
-
-	// function Navbar1() {
-	//   return (
-	//     <div className="navbar-container">
-	//       <NavBar />
-	//     </div>
-	//   );
-	// }
+			<Link to="/admin/dashboard" className="navbar__item">
+				Admin Dashboard
+			</Link>
+		</>
+	)
 
 	return (
 		<header className="navbar">
@@ -201,7 +125,9 @@ const NavBar = () => {
 			<a href="#footer" className="navbar__item">
 				Contact Us
 			</a>
-			{<Fragment>{value ? authLink : guestLink}</Fragment>}
+			{!value && (guestLink)}
+			{value && (!role || role === 'user') && (userLink)}
+			{value&&role==='admin'&&(adminLink)}
 		</header>
 	)
 }
