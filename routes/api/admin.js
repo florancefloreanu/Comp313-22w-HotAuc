@@ -31,12 +31,32 @@ router.put("/users/:userId", async (req, res) => {
 	}
 })
 
+router.get("/users/:userId", async (req, res) => {
+	try {
+		const user = await User.findById(req.params.userId)
+		res.json(user)
+	} catch (err) {
+		res.status(500).json({ msg: err.message })
+	}
+})
+
 router.get("/items", async (req, res) => {
 	try {
-		const items = await AuctionItem.find({ endTime: { $gte: currentDate } })
+		var inputDate = Date.now()
+		const items = await AuctionItem.find({ endTime: { $lte: inputDate } })
+		return res.json(items)
 	} catch (err) {
 		console.log(err.message)
 		res.status(500).json({ msg: "Auction Item search error - all" })
+	}
+})
+
+router.get("/items/:itemId", async (req, res) => {
+	try {
+		const item = await AuctionItem.findById(req.params.itemId)
+		res.json(item)
+	} catch (err) {
+		res.status(500).json({ msg: err.message })
 	}
 })
 

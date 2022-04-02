@@ -1,22 +1,19 @@
-import React from 'react'
-//edit user
 import React, { Component, useEffect, useState } from "react"
 import axios from "axios"
 import { Button, Card, Col, Row, Form } from "react-bootstrap"
 import { useSelector } from "react-redux"
-import { useParams,Navigate } from "react-router-dom"
+import { useParams, Navigate, useNavigate } from "react-router-dom"
+import { async } from "@firebase/util"
 
-function EditUser(props) {
+function EditUser() {
 	const [user, setUser] = useState({
-		userName: "",
-		email: "",
-		address: ""
+		name: "",
+		email: ""
 	})
-	const token = useSelector((state) => state.auth.value.token)
+
+	const navigate = useNavigate()
 
 	const { userId } = useParams()
-
-	const [isUpdate, setIsUpdate] = useState(false)
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -24,24 +21,16 @@ function EditUser(props) {
 				//Set request header
 				const config = {
 					headers: {
-						"Content-Type": "Application/json",
-						Authorization: `Bearer ${token}`
+						"Content-Type": "Application/json"
 					}
 				}
 
 				//Make request
 				const res = await axios.get(
-					//`http://localhost:5000/api/users/${userId}`,
+					`http://localhost:5000/api/admin/users/${userId}`,
 					config
 				)
-
-                console.log(res.data)
-				setUser({
-                    userName: res.data.userName,
-					email: res.data.email,
-					address: res.data.address
-				}) 
-
+				setUser(res.data)
 			} catch (err) {
 				console.log(err.message)
 			}
@@ -53,45 +42,43 @@ function EditUser(props) {
 	const onInputChange = (e) => {
 		setUser({ ...user, [e.target.name]: e.target.value })
 	}
-	const handleCreateUser = async (e) => {
+	const updateUser = async (e) => {
 		e.preventDefault()
-
-		const body = course
 		try {
 			//Set request header
 			const config = {
 				headers: {
-					"Content-Type": "Application/json",
-					Authorization: `Bearer ${token}`
+					"Content-Type": "Application/json"
 				}
 			}
 
 			//Make request
 			const res = await axios.put(
-				//`http://localhost:5000/api/users/${userId}`,
-				body,
+				`http://localhost:5000/api/admin/users/${userId}`,
+				user,
 				config
 			)
-			setIsUpdate(true)
+
+			navigate("/admin/dashboard/users")
 		} catch (err) {
 			console.log(err.message)
 		}
-    }
-    
-    if (isUpdate) {
-        return <Navigate to="/admin/users/all" />
-    }
+	}
+
+	const handleBack = () => {
+		navigate("/admin/dashboard/users")
+	}
 
 	return (
-		<>
-			<Form onSubmit={(e) => handleCreateCourse(e)}>
+		<div className="admin-dashboard-content">
+			<Form onSubmit={(e) => updateUser(e)}>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>userName</Form.Label>
+					<Form.Label>name</Form.Label>
 					<Form.Control
 						type="txt"
-						placeholder="Enter your user name"
-						name="userName"
-						value={user.userName}
+						placeholder="Enter your name"
+						name="name"
+						value={user.name}
 						onChange={(e) => onInputChange(e)}
 					/>
 				</Form.Group>
@@ -105,22 +92,15 @@ function EditUser(props) {
 						onChange={(e) => onInputChange(e)}
 					/>
 				</Form.Group>
-				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>address</Form.Label>
-					<Form.Control
-						type="text"
-						placeholder="address"
-						name="address"
-						value={user.address}
-						onChange={(e) => onInputChange(e)}
-					/>
-				</Form.Group>
-				
+
 				<Button variant="primary" type="submit">
 					Update
 				</Button>
+				<Button variant="primary" onClick={() => handleBack()}>
+					Back
+				</Button>
 			</Form>
-		</>
+		</div>
 	)
 }
 

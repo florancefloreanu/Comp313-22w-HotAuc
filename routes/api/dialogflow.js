@@ -39,16 +39,16 @@ router.post("/textQuery", async (req, res) => {
 
     // Send request and log result
     const responses = await sessionClient.detectIntent(request);
-    console.log('Detected intent');
+    //console.log('Detected intent');
     const result = responses[0].queryResult;
-    console.log(`  Query: ${result.queryText}`);
-    console.log(`  Response: ${result.fulfillmentText}`);
+    //console.log(`  Query: ${result.queryText}`);
+    //console.log(`  Response: ${result.fulfillmentText}`);
     // console.log((`Data: ${JSON.stringify(result.fulfillmentMessages)}`));
-    console.log((`Result: ${JSON.stringify(responses[0].queryResult)}`));
+    //console.log((`Result: ${JSON.stringify(responses[0].queryResult)}`));
     if (result.intent) {
         // console.log(`  Intent: ${JSON.stringify(result.intent)}`);
     } else {
-        console.log(`  No intent matched.`);
+       // console.log(`  No intent matched.`);
     }
 
     res.send(result)
@@ -59,7 +59,7 @@ router.post("/textQuery", async (req, res) => {
 router.post("/eventQuery", async (req, res) => {
     // A unique identifier for the given session
     // const sessionId = uuid.v4();
-    console.log(req.body);
+   // console.log(req.body);
     // The text query request.
     const request = {
         session: sessionPath,
@@ -75,14 +75,14 @@ router.post("/eventQuery", async (req, res) => {
 
     // Send request and log result
     const responses = await sessionClient.detectIntent(request);
-    console.log('Detected intent');
+    //console.log('Detected intent');
     const result = responses[0].queryResult;
-    console.log(`  Query: ${result.queryText}`);
-    console.log(`  Response: ${result.fulfillmentText}`);
+   // console.log(`  Query: ${result.queryText}`);
+   // console.log(`  Response: ${result.fulfillmentText}`);
     if (result.intent) {
-        console.log(`  Intent: ${result.intent.displayName}`);
+       // console.log(`  Intent: ${result.intent.displayName}`);
     } else {
-        console.log(`  No intent matched.`);
+      //  console.log(`  No intent matched.`);
     }
 
     res.send(result)

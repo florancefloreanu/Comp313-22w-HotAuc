@@ -1,11 +1,22 @@
-import React from 'react'
+import React from "react"
+import AdminAllUsers from "./users/AdminAllUsers"
+import AdminDashboardSidebar from "./AdminDashboardSidebar"
+import {
+	BrowserRouter as Router,
+	Outlet,
+	Route,
+	Routes
+} from "react-router-dom"
+import"./Admin.css"
 
 function AdminDashboard() {
-  return (
-    <div>AdminDashboard</div>
-    // 2 buttons one for users and one for items. by default you can see users
-    // edit and delete users and items other 2 files
-  )
+	return (
+		<div className="container-height-100 container-fluid d-flex flex-row">
+			<AdminDashboardSidebar />
+
+			<Outlet className="p-3 admin-dashboard-content" />
+		</div>
+	)
 }
 
 export default AdminDashboard

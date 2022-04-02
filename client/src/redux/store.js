@@ -4,6 +4,7 @@ import dashbordItemReducer from "./features/dashboardItemsSlice";
 import { userReducer } from "./features/userInforSlice";
 import chatbotReducer from "./features/chatbotSlice";
 import layoutSlice from "./features/layoutSlice";
+import adminDashboardSlice from "./features/adminDashboardSlice";
 
 export default configureStore({
 	reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
 		userInfor: userReducer,
 		dashboardItem: dashbordItemReducer,
 		chatbotMessage: chatbotReducer,
-		layout: layoutSlice
+		layout: layoutSlice,
+		adminDashboard:adminDashboardSlice
 	}
 })
