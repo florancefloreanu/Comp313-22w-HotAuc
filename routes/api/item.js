@@ -1,3 +1,15 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\routes\api\item.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack
+ * Created Date: Tuesday, March 29th 2022, 6:39:21 pm
+ * Author: Han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * 
+ * Purpose: Endpoints for item
+ */
+
 const express = require("express");
 const router = express.Router();
 //Middleware

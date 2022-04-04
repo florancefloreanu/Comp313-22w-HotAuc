@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\Navbar.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Wednesday, February 23rd 2022, 10:05:41 am
+ * Author: han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Navbar component
+ */
+
 import React, { useState, Fragment, useEffect } from "react"
 import { Link } from "react-router-dom"
 import "./Navbar.css"

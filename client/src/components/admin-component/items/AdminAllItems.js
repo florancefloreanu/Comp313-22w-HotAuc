@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\admin-component\items\AdminAllItems.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Friday, April 1st 2022, 10:11:20 pm
+ * Author: han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: All items in admin dashboard
+ */
+
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Pagination } from "react-bootstrap"

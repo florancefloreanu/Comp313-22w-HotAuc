@@ -1,3 +1,15 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\routes\api\user.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack
+ * Created Date: Monday, January 17th 2022, 9:59:03 am
+ * Author: Han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Endpoints for user
+ */
+
+
 const express = require("express")
 const router = express.Router()
 //Middleware

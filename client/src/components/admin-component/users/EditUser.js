@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\admin-component\users\EditUser.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Tuesday, March 29th 2022, 7:02:01 pm
+ * Author: han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: edit user in admin dashboard
+ */
+
 import React, { Component, useEffect, useState } from "react"
 import axios from "axios"
 import { Button, Card, Col, Row, Form } from "react-bootstrap"

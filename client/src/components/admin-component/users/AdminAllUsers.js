@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\admin-component\users\AdminAllUsers.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Tuesday, March 29th 2022, 7:02:01 pm
+ * Author: Han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: All users in admin dashboard
+ */
+
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Pagination } from "react-bootstrap"
@@ -5,8 +16,7 @@ import { Table } from "react-bootstrap"
 import { Button, Card, Col, Row } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-//a list of users
-//buttons: edit and delete
+
 
 function AdminAllUsers() {
 	const [users, setUsers] = useState([])

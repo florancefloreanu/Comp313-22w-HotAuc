@@ -1,103 +1,113 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router";
-import Moment from "react-moment";
-import { useEffect, useState } from "react";
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\item-component\item.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Thursday, March 17th 2022, 11:03:03 am
+ * Author: han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Detail for one item
+ */
 
-import "./Items.css";
-import { SERVER_URL } from "../../ConstantValue";
-import axios from "axios";
-import { async } from "@firebase/util";
-import { calculateTimeLeft } from "../../helper/time";
-import "./item.css";
-import { Alert } from "react-bootstrap";
+import React from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { useParams } from "react-router"
+import Moment from "react-moment"
+import { useEffect, useState } from "react"
+
+import "./Items.css"
+import { SERVER_URL } from "../../ConstantValue"
+import axios from "axios"
+import { async } from "@firebase/util"
+import { calculateTimeLeft } from "../../helper/time"
+import "./item.css"
+import { Alert } from "react-bootstrap"
 
 const Item = () => {
-  const { id } = useParams();
-  const userId = useSelector((state) => state.userInfor.user._id);
+	const { id } = useParams()
+	const userId = useSelector((state) => state.userInfor.user._id)
 
-  const [price, setPrice] = useState(0);
+	const [price, setPrice] = useState(0)
 
-  const [isAlert, setIsAlert] = useState(false);
+	const [isAlert, setIsAlert] = useState(false)
 
-  const [data, setData] = useState(null);
-  const [images, setImages] = useState([]);
-  const [selectedImg, setSelectedImg] = useState();
+	const [data, setData] = useState(null)
+	const [images, setImages] = useState([])
+	const [selectedImg, setSelectedImg] = useState()
 
-  const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true)
 
-  const onPriceInputChange = (e) => {
-    setPrice(e.target.value);
-  };
+	const onPriceInputChange = (e) => {
+		setPrice(e.target.value)
+	}
 
-  const handleSubmitPrice = async (e) => {
-    e.preventDefault();
-    if (price <= data.currentPrice) {
-      setIsAlert(true)
-      setTimeout(() => {
+	const handleSubmitPrice = async (e) => {
+		e.preventDefault()
+		if (price <= data.currentPrice) {
+			setIsAlert(true)
+			setTimeout(() => {
 				setIsAlert(false)
-	  }, 3000)
-		return
-    }
-	
+			}, 3000)
+			return
+		}
 
-    const body = { price };
-    const config = {
-      headers: {
-        "Content-Type": "Application/json",
-      },
-    };
+		const body = { price }
+		const config = {
+			headers: {
+				"Content-Type": "Application/json"
+			}
+		}
 
-    const res = await axios.put(
-      `${SERVER_URL}item/${data._id}/user/${userId}`,
-      body,
-      config
-    );
-    setData(res.data);
-    console.log(res.data);
-  };
+		const res = await axios.put(
+			`${SERVER_URL}item/${data._id}/user/${userId}`,
+			body,
+			config
+		)
+		setData(res.data)
+		console.log(res.data)
+	}
 
-  useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        //Set request header
+	useEffect(() => {
+		const fetchItem = async () => {
+			try {
+				//Set request header
 
-        const config = {
-          headers: {
-            "Content-Type": "Application/json",
-          },
-        };
+				const config = {
+					headers: {
+						"Content-Type": "Application/json"
+					}
+				}
 
-        const res = await axios.get(`${SERVER_URL}item/${id}`, config);
+				const res = await axios.get(`${SERVER_URL}item/${id}`, config)
 
-        console.log(res);
+				console.log(res)
 
-        setData(res.data);
-        setImages(res.data.images);
-        setSelectedImg(res.data.images[0].uri);
-        console.log(images);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+				setData(res.data)
+				setImages(res.data.images)
+				setSelectedImg(res.data.images[0].uri)
+				console.log(images)
+				setLoading(false)
+			} catch (error) {
+				console.log(error)
+			}
+		}
 
-    fetchItem();
-  }, []);
+		fetchItem()
+	}, [])
 
-  const [timeLeft, setTimeLeft] = useState();
+	const [timeLeft, setTimeLeft] = useState()
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft(data.endTime));
-      //console.log(timeLeft);
-    }, 1000);
-    //console.log(timeLeft)
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setTimeLeft(calculateTimeLeft(data.endTime))
+			//console.log(timeLeft);
+		}, 1000)
+		//console.log(timeLeft)
 
-    return () => clearTimeout(timer);
-  });
+		return () => clearTimeout(timer)
+	})
 
-  return (
+	return (
 		<div className="items">
 			<div className="home">
 				<h1>{!loading && data.title}</h1>
@@ -124,12 +134,6 @@ const Item = () => {
 							</div>
 						</div>
 					</div>
-
-					{/* {images.map((image, key) => {
-            return (
-              <img class="image" src={!loading && image.uri} alt="Random Img" />
-            );
-          })} */}
 
 					<p class="text">Brand: {!loading && data.brand}</p>
 					<p class="text">Year Make: {!loading && data.year}</p>
@@ -176,6 +180,6 @@ const Item = () => {
 			</div>
 		</div>
 	)
-};
+}
 
-export default Item;
+export default Item

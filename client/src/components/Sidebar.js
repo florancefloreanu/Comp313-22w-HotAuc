@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\Sidebar.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Tuesday, March 29th 2022, 6:39:21 pm
+ * Author: han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Sidebar for searching cars
+ */
+
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setSearchResult } from "../redux/features/itemSlice";

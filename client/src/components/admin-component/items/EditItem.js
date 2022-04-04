@@ -1,3 +1,15 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\admin-component\items\EditItem.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Friday, April 1st 2022, 10:26:22 pm
+ * Author: Han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Edit item page in admin dashboard
+ * 
+ */
+
 import React, { Component, useEffect, useState } from "react"
 import axios from "axios"
 import { Button, Card, Col, Row, Form } from "react-bootstrap"

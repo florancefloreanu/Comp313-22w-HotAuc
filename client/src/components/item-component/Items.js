@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\item-component\Items.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Tuesday, March 29th 2022, 6:39:21 pm
+ * Author: Olivia
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Show items list
+ */
+
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Items.css";

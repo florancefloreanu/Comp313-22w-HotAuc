@@ -1,3 +1,15 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\routes\api\admin.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack
+ * Created Date: Tuesday, March 29th 2022, 7:02:01 pm
+ * Author: Kenneth
+ * 
+ * Copyright (c) HotAuc
+ * 
+ * Purpose: Endpoints for admin
+ */
+
+
 const express = require("express")
 const router = express.Router()
 const bcrypt = require("bcryptjs")

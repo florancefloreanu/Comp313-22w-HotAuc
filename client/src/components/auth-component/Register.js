@@ -1,3 +1,15 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\auth-component\Register.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Tuesday, March 29th 2022, 7:02:01 pm
+ * Author: ting
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: User register page
+ */
+
+
 import "./Register.css"
 import React, {useEffect, useState } from "react"
 import "./Login.css"

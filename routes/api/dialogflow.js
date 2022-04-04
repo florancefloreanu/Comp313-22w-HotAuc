@@ -1,3 +1,15 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\routes\api\dialogflow.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack
+ * Created Date: Tuesday, March 29th 2022, 6:39:21 pm
+ * Author: Heesoo
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Endpoints for chatbot
+ */
+
+
 const express = require("express");
 const router = express.Router();
 const dialogflow = require('dialogflow');

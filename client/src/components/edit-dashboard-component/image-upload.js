@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\edit-dashboard-component\image-upload.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Tuesday, March 29th 2022, 6:39:13 pm
+ * Author: Kenneth
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Upload images in user dashboard
+ */
+
 import { useState, useEffect, Component } from "react"
 import storage from "../../firebase/config"
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"

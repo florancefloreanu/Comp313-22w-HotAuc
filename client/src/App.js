@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\App.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Tuesday, March 29th 2022, 6:39:21 pm
+ * Author: Han
+ *
+ * Copyright (c) 2022 HotAuc
+ *
+ * Purpose: Routing Routes, Put together layout
+ */
+
 import React, { Fragment, useEffect, useState } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import "./App.css"
@@ -179,71 +190,5 @@ function App() {
 		</Router>
 	)
 }
-
-// class App extends React.Component {
-// 	constructor() {
-// 		super()
-// 		this.state = {
-// 			user: {},
-// 			token: "",
-// 			setUserContext: (key, value) => {
-// 				this.setState({ [key]: value })
-// 			}
-// 		}
-// 	}
-
-// 	render() {
-// 		return (
-// 			<Provider store={store}>
-// 				<Router>
-// 					<LocalUser>
-// 						<Fragment>
-// 							<Navbar />
-// 							<Sidebar className="sidebar" style={inputStyle} />
-// 							<Chatbot />
-// 							<section
-// 								className="right-container"
-// 								style={{ minHeight: "900px" }}
-// 							>
-// 								<Routes>
-// 									<Route exact path="/" element={<Items />} />
-// 									<Route
-// 										path="/dashboard"
-// 										element={
-// 											<PrivateRoute>
-// 												<Dashboard />
-// 											</PrivateRoute>
-// 										}
-// 									/>
-// 									<Route exact path="/register" element={<Register />} />
-// 									<Route
-// 										path="dashboard/profile/edit"
-// 										element={
-// 											<PrivateRoute>
-// 												<EditProfile />
-// 											</PrivateRoute>
-// 										}
-// 									/>
-// 									<Route
-// 										path="dashboard/bid/edit"
-// 										element={
-// 											<PrivateRoute>
-// 												<EditBid />
-// 											</PrivateRoute>
-// 										}
-// 									/>
-// 									<Route path="/item/:id" element={<Item />} />
-
-// 									<Route exact path="/login" element={<Login />} />
-// 								</Routes>
-// 							</section>
-// 							<Footer />
-// 						</Fragment>
-// 					</LocalUser>
-// 				</Router>
-// 			</Provider>
-// 		)
-// 	}
-// }
 
 export default App

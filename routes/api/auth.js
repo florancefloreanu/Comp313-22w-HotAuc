@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\routes\api\auth.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack
+ * Created Date: Monday, January 17th 2022, 9:59:03 am
+ * Author: Kit
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Endpoint for authentication
+ */
+
 const express = require("express")
 const router = express.Router()
 const gravatar = require("gravatar")
