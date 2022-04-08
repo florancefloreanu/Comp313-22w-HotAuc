@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import Moment from "react-moment"
 import axios from "axios"
 import { SERVER_URL } from "../../../ConstantValue"
+import Swal from 'sweetalert2';
 
 import Paypal from '../../paypal-component/Paypal';
 
@@ -42,12 +43,25 @@ function DashboardWin() {
 
 	const handlePaypal = (resultBool, resultRes) => {
 		if (resultBool === true) {
-			console.log("Good");
+			console.log("Payment Successful");
+			Swal.fire({
+				position: 'top-end',
+				icon: 'success',
+				title: 'Payment Successful',
+				text: 'Thank you for your billing',
+				showConfirmButton: false,
+				timer: 2000
+			  })
 		} else {
-			console.log("Bad");
+			console.log("Payment Unsuccessful");
+			Swal.fire({
+				icon: 'error',
+				title: 'Payment Failed',
+				text: 'Your transaction was cancelled. Please try again',
+			  })
 		}
 		if (resultRes) console.log(resultRes);
-		window.location.reload();
+
 	}
 
 	const testOnlyCancelPayment = async (item) => {

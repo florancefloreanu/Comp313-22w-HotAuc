@@ -3,6 +3,7 @@ import PaypalExpressBtn from 'react-paypal-express-checkout';
 
 import axios from "axios"
 import { SERVER_URL } from "../../ConstantValue"
+import Swal from 'sweetalert2';
 
 function Paypal(props) {
     const style = {
@@ -38,12 +39,13 @@ function Paypal(props) {
     }
 	
     const onCancel = (data) => {
-        // console.log('The payment was cancelled!', data);
-        props.onPaymentDone(false, data);
+        console.log('The payment was cancelled!', data);
+        props.onPaymentDone(false, data)
     }
 	
     const onError = (err) => {
-        // console.log("Error!", err);
+        console.log("Error!", err);
+        window.alert('Your transaction cannot be completed. Please try again and contact us if you keep getting this error ')
         props.onPaymentDone(false, err);
     }
 	
