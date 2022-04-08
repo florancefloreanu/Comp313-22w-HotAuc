@@ -37,10 +37,6 @@ function DashboardWin() {
 		fetchItems()
 	}, [])
 
-	// useEffect(() => {
-	// 	console.log("Bob, do something!");
-	// }, [payResult])
-
 	const handlePaypal = (resultBool, resultRes) => {
 		if (resultBool === true) {
 			console.log("Payment Successful");
@@ -104,30 +100,45 @@ function DashboardWin() {
 				console.log(myPrice[0])
 
 				return (
-					<div className="card">
-						<div className="card-body">
-							{item.images.map((prop) => (
-								<img src={item.images[0].uri} alt="hotwheels image" />
-							))}
-							<p> </p>
-							<h2>{item.title}</h2>
-							<p>Color: {item.color}</p>
-							<p>Description: {item.description}</p>
-							<p>Year: {item.year}</p>
-							<br />
-							<p>Final Price: {item.currentPrice}</p>
-								<Moment parse="YYYY-MM-DD">{item.endTime}</Moment>
+					<div className="card-win">
+						<div className="card-win-body">
+						<table>
+							<thead>
+							<tr>
+								<td rowspan="2">
+									{item.images.map((prop) => (
+									<img src={item.images[0].uri} alt="hotwheels image" />
+								))}
+								</td>
+								<td className="title-col">
+									{item.title}
+								</td>
+								<td rowspan="2" className="price-col">
+									<p>$ {item.currentPrice}</p>
+								</td>
+								<td rowspan="2" className="paid-col">
+								{item.isPaid && (
+									<p>Paid</p>
+									)}
+									{!item.isPaid && (
+										<Paypal
+											targetItem={!loading && item}
+											subTotal={!loading && item.currentPrice}
+											onPaymentDone={handlePaypal}
+											/>
+									)}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>Color: {item.color}</p>
+									<p>Description: {item.description}</p>
+									<p>Year: {item.year}</p>
+								</td>
+							</tr>
+							</thead>
+						</table>
 							
-							{item.isPaid && (
-								<p>Paid: This item is paid!</p>
-							)}
-							{!item.isPaid && (
-								<Paypal
-									targetItem={!loading && item}
-									subTotal={!loading && item.currentPrice}
-									onPaymentDone={handlePaypal}
-									/>
-							)}
 							<button onClick={() => {testOnlyCancelPayment(item)}}>Reset4Test</button>
 						</div>
 					</div>

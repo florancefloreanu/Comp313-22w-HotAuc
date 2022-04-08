@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setSearchResult,
-  setResultError,
-} from "../../../redux/features/dashboardItemsSlice";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { SERVER_URL } from "../../../ConstantValue";
 import Moment from "react-moment";
+import "../Dashboard.css";
 
 function DashboardSell() {
   const userId = useSelector((state) => state.userInfor.user._id);

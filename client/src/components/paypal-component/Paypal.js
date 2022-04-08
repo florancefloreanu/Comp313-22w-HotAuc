@@ -3,7 +3,6 @@ import PaypalExpressBtn from 'react-paypal-express-checkout';
 
 import axios from "axios"
 import { SERVER_URL } from "../../ConstantValue"
-import Swal from 'sweetalert2';
 
 function Paypal(props) {
     const style = {

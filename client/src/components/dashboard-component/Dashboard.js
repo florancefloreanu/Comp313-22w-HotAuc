@@ -6,6 +6,7 @@ import DashboardSell from "./layouts/Dashboard-sell"
 import DashboardBid from "./layouts/Dashboard-bid"
 import DashboardWin from "./layouts/Dashboard-win"
 
+
 function Dashboard(props) {
 	const [selectedSection, setSelectedSection] = useState("profile")
 
@@ -31,32 +32,38 @@ function Dashboard(props) {
 	const win = <DashboardWin />
 
 	return (
+		<div>
 		<Fragment>
-			<div>
-				<ButtonGroup aria-label="Basic example">
-					<Button variant="primary" onClick={handleProfileSelection}>
-						Profile
-					</Button>
-					<Button variant="primary" onClick={handleSellSelection}>
-						Sell
-					</Button>
-					<Button variant="primary" onClick={handleBidSelection}>
-						Bid
-					</Button>
-					<Button variant="primary" onClick={handleWinSelection}>
-						Win
-					</Button>
-				</ButtonGroup>
-			</div>
-			
-			<div>
-				{(selectedSection === "profile" && profile) ||
-					(selectedSection === "sell" && sell) ||
-					(selectedSection === "bid" && bid) ||
-					(selectedSection === "win" && win)}
-					
-			</div>
+		<ButtonGroup aria-label="Basic example">
+
+		<table className="table-dashboard">
+			<thead>
+				<tr>
+					<td className="sidebar-col">
+					<body>
+						<ul class="menu">
+						<li><a  onClick={handleProfileSelection}>Profile</a></li>
+						<li><a onClick={handleSellSelection}>Sell</a></li>
+						<li><a nClick={handleBidSelection}>Bid</a></li>
+						<li><a onClick={handleWinSelection}>Win</a></li>
+						</ul>
+					</body>
+
+					</td>
+					<td className="content-col">
+						<div>
+							{(selectedSection === "profile" && profile) ||
+								(selectedSection === "sell" && sell) ||
+								(selectedSection === "bid" && bid) ||
+								(selectedSection === "win" && win)}
+						</div>
+					</td>
+				</tr>
+			</thead>
+		</table>
+		</ButtonGroup>
 		</Fragment>
+			</div>
 	)
 }
 

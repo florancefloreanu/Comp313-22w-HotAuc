@@ -86,9 +86,11 @@ function App() {
                 path="/dashboard"
                 element={
                   <PrivateRoute>
+                    <div className="dashboard">
                     <NoSidebar>
-                      <Dashboard />
+                      <Dashboard/>
                     </NoSidebar>
+                    </div>
                   </PrivateRoute>
                 }
               />
