@@ -20,7 +20,7 @@ function Paypal(props) {
         // console.log("The payment was succeeded!", payment);
         props.onPaymentDone(true, payment);
 
-        let newItem = props.targetItem;
+        const newItem = props.targetItem;
         newItem.isPaid = true;
 
         const body = newItem;
