@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\edit-dashboard-component\edit-profile.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Monday, January 17th 2022, 9:55:29 am
+ * Author: Han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Edit profile page in user dashboard
+ */
+
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { SERVER_URL } from "../../ConstantValue"

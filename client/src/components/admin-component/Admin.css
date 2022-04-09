@@ -1,0 +1,10 @@
+.container-height-100 {
+	min-height: 80vh;
+	height: auto;
+	text-align: center;
+	margin: auto;
+}
+.admin-dashboard-content {
+	margin: auto;
+	min-width: 400px;
+}

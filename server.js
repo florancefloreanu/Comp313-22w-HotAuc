@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\server.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack
+ * Created Date: Tuesday, March 29th 2022, 7:02:01 pm
+ * Author: Han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Porpose: Running server
+ */
+
 var http = require("http")
 const express = require("express")
 const app = express()

@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\auth-component\UserLogin.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Monday, January 31st 2022, 10:17:10 am
+ * Author: han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: user login page
+ */
+
 import React, { useEffect, useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"

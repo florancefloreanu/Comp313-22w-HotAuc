@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\components\contact-component\Contact.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Tuesday, March 29th 2022, 6:39:21 pm
+ * Author: Heesoo
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Contact info page 
+ */
+
 import React, { useEffect } from 'react';
 import "./Contact.css"
 

@@ -1,3 +1,14 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\models\auction_item.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack
+ * Created Date: Wednesday, February 23rd 2022, 10:05:41 am
+ * Author: Han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: Auction item schema in mongoDB
+ */
+
 const mongoose = require("mongoose")
 
 const AuctionItemSchema = new mongoose.Schema(

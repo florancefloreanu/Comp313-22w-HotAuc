@@ -1,3 +1,15 @@
+/*
+ * Filename: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client\src\redux\features\userInforSlice.js
+ * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
+ * Created Date: Monday, January 17th 2022, 9:55:29 am
+ * Author: han
+ * 
+ * Copyright (c) 2022 HotAuc
+ * 
+ * Purpose: save user related states
+ */
+
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
 import { SERVER_URL } from "../../ConstantValue"
@@ -23,6 +35,7 @@ export const login = createAsyncThunk(
 			localStorage.setItem("token", response.data.token)
 			localStorage.setItem("name", response.data.user.name)
 			localStorage.setItem("_id", response.data.user._id)
+			localStorage.setItem("role", response.data.user.role)
 			return response
 		} catch (err) {
 			console.log(err)
@@ -46,10 +59,11 @@ export const register = createAsyncThunk(
 		if (response.status !== 200) {
 			return thunkAPI.rejectWithValue(response)
 		}
-			localStorage.setItem("email", response.data.user.email)
-			localStorage.setItem("token", response.data.token)
-			localStorage.setItem("name", response.data.user.name)
-			localStorage.setItem("_id", response.data.user._id)
+		localStorage.setItem("email", response.data.user.email)
+		localStorage.setItem("token", response.data.token)
+		localStorage.setItem("name", response.data.user.name)
+		localStorage.setItem("_id", response.data.user._id)
+		localStorage.setItem("role", response.data.user.role)
 
 		return response
 	}
