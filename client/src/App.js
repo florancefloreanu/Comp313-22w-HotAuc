@@ -29,6 +29,11 @@ import BrandPieChart from "./components/admin-component/BrandPieChart";
 import OneSignal from "react-onesignal";
 import UserRegistrationLineChart from "./components/admin-component/UserRegistrationLineChart";
 import MonthlyItemsPostedBarChart from "./components/admin-component/MonthlyItemsPostedBarChart";
+import AdminAllUsers from "./components/admin-component/users/AdminAllUsers"
+import EditUser from "./components/admin-component/users/EditUser"
+import AdminAllItems from "./components/admin-component/items/AdminAllItems"
+import EditItem from "./components/admin-component/items/EditItem"
+import AdminDashboardHome from "./components/admin-component/AdminDashboardHome"
 const appId = "5d1f1b0a-5f01-4823-9796-7ccc768f8393";
 
 function App() {
@@ -63,30 +68,30 @@ function App() {
     });
   }, []);
 
-  return (
-    <Router>
-      <LocalUser>
-        <Fragment>
-          <Navbar />
-          <div style={sideBarVisibility}>
-            <Sidebar className="sidebar" />
-          </div>
-          <Chatbot />
-          <section
-            className="right-container"
-            style={({ minHeight: "900px" }, mainContainerMargin)}
-          >
-            <Routes>
-              <Route
-                exact
-                path="/"
-                element={
-                  <ShowSidebar>
-                    <Items />
-                  </ShowSidebar>
-                }
-              />
-                 <Route
+	return (
+		<Router>
+			<LocalUser>
+				<Fragment>
+					<Navbar />
+					<div style={sideBarVisibility}>
+						<Sidebar className="sidebar" />
+					</div>
+					<Chatbot />
+					<section
+						className="right-container"
+						style={({ minHeight: "900px" }, mainContainerMargin)}
+					>
+						<Routes>
+							<Route
+								exact
+								path="/"
+								element={
+									<ShowSidebar>
+										<Items />
+									</ShowSidebar>
+								}
+							/>
+							                 <Route
                 path="/dashboard/profile"
                 element={
                   <PrivateRoute>
@@ -110,15 +115,15 @@ function App() {
                 }
               />
               <Route
-								path="/dashboard"
-								element={
-									<PrivateRoute>
-										<NoSidebar>
-											<DashboardProfile />
-										</NoSidebar>
-									</PrivateRoute>
-								}
-							/>
+                path="/dashboard"
+                element={
+                  <PrivateRoute>
+                    <NoSidebar>
+                      <DashboardProfile />
+                    </NoSidebar>
+                  </PrivateRoute>
+                }
+              />
               <Route
                 path="/dashboard/sell"
                 element={
@@ -188,158 +193,87 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              <Route
-                exact
-                path="/register"
-                element={
-                  <NoSidebar>
-                    <Register />
-                  </NoSidebar>
-                }
-              />
-              <Route
-                path="dashboard/profile/edit"
-                element={
-                  <PrivateRoute>
-                    <NoSidebar>
-                      <EditProfile />
-                    </NoSidebar>
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="dashboard/bid/edit"
-                element={
-                  <PrivateRoute>
-                    <NoSidebar>
-                      <EditBid />
-                    </NoSidebar>
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/item/:id"
-                element={
-                  <NoSidebar>
-                    <Item />
-                  </NoSidebar>
-                }
-              />
+							<Route
+								exact
+								path="/register"
+								element={
+									<NoSidebar>
+										<Register />
+									</NoSidebar>
+								}
+							/>
+							<Route
+								path="dashboard/profile/edit"
+								element={
+									<PrivateRoute>
+										<NoSidebar>
+											<EditProfile />
+										</NoSidebar>
+									</PrivateRoute>
+								}
+							/>
+							<Route
+								path="dashboard/bid/edit"
+								element={
+									<PrivateRoute>
+										<NoSidebar>
+											<EditBid />
+										</NoSidebar>
+									</PrivateRoute>
+								}
+							/>
+							<Route
+								path="/item/:id"
+								element={
+									<NoSidebar>
+										<Item />
+									</NoSidebar>
+								}
+							/>
 
-              <Route
-                exact
-                path="/login"
-                element={
-                  <NoSidebar>
-                    <Login />
-                  </NoSidebar>
-                }
-              />
-              <Route
-                path="/admin/dashboard"
-                element={
-                  <NoSidebar>
-                    <AdminDashboard />
-                  </NoSidebar>
-                }
-              ></Route>
-              <Route
-                path="/admin/brands-piechart"
-                element={
-                  <NoSidebar>
-                    <BrandPieChart />
-                  </NoSidebar>
-                }
-              ></Route>
-              <Route
-                path="/admin/user-registrations-linechart"
-                element={
-                  <NoSidebar>
-                    <UserRegistrationLineChart />
-                  </NoSidebar>
-                }
-              ></Route>
-              <Route
-                path="/admin/monthly-itemposting-barchart"
-                element={
-                  <NoSidebar>
-                    <MonthlyItemsPostedBarChart />
-                  </NoSidebar>
-                }
-              ></Route>
-            </Routes>
-          </section>
-          <Footer />
-        </Fragment>
-      </LocalUser>
-    </Router>
-  );
+							<Route
+								exact
+								path="/login"
+								element={
+									<NoSidebar>
+										<Login />
+									</NoSidebar>
+								}
+							/>
+							<Route
+								path="/admin/dashboard"
+								element={
+									<NoSidebar>
+										<AdminDashboard />
+									</NoSidebar>
+								}
+							>
+								<Route path="home" element={<AdminDashboardHome />} />
+								<Route path="users" element={<AdminAllUsers />} />
+								<Route
+									path="users/edit/:userId"
+									element={<EditUser></EditUser>}
+								/>
+
+								<Route path="items" element={<AdminAllItems />} />
+								<Route path="items/edit/:itemId" element={<EditItem />} />
+								<Route path="brands-piechart" element={<BrandPieChart />} />
+								<Route
+									path="user-registrations-linechart"
+									element={<UserRegistrationLineChart />}
+								/>
+								<Route
+									path="monthly-itemposting-barchart"
+									element={<MonthlyItemsPostedBarChart />}
+								/>
+							</Route>
+						</Routes>
+					</section>
+					<Footer />
+				</Fragment>
+			</LocalUser>
+		</Router>
+	)
 }
 
-// class App extends React.Component {
-// 	constructor() {
-// 		super()
-// 		this.state = {
-// 			user: {},
-// 			token: "",
-// 			setUserContext: (key, value) => {
-// 				this.setState({ [key]: value })
-// 			}
-// 		}
-// 	}
-
-// 	render() {
-// 		return (
-// 			<Provider store={store}>
-// 				<Router>
-// 					<LocalUser>
-// 						<Fragment>
-// 							<Navbar />
-// 							<Sidebar className="sidebar" style={inputStyle} />
-// 							<Chatbot />
-// 							<section
-// 								className="right-container"
-// 								style={{ minHeight: "900px" }}
-// 							>
-// 								<Routes>
-// 									<Route exact path="/" element={<Items />} />
-// 									<Route
-// 										path="/dashboard"
-// 										element={
-// 											<PrivateRoute>
-// 												<Dashboard />
-// 											</PrivateRoute>
-// 										}
-// 									/>
-// 									<Route exact path="/register" element={<Register />} />
-// 									<Route
-// 										path="dashboard/profile/edit"
-// 										element={
-// 											<PrivateRoute>
-// 												<EditProfile />
-// 											</PrivateRoute>
-// 										}
-// 									/>
-// 									<Route
-// 										path="dashboard/bid/edit"
-// 										element={
-// 											<PrivateRoute>
-// 												<EditBid />
-// 											</PrivateRoute>
-// 										}
-// 									/>
-// 									<Route path="/item/:id" element={<Item />} />
-
-// 									<Route exact path="/login" element={<Login />} />
-// 								</Routes>
-// 							</section>
-// 							<Footer />
-// 						</Fragment>
-// 					</LocalUser>
-// 				</Router>
-// 			</Provider>
-// 		)
-// 	}
-// }
-
-export default App;
+export default App
