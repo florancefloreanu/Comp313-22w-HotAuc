@@ -42,11 +42,13 @@ function DashboardSell() {
     <div className="dashboard-sell">
       <Link to="/dashboard/bid/edit"> Go to post a new sell</Link>
       <h2>Selling</h2>
-      <h4>My earnings : <span class="stress">$ {earning}</span></h4>
+      <h5>
+        My earnings : <span class="stress">$ {earning}</span>
+      </h5>
       {items?.map((item) => {
         return (
 					<div className="card">
-						<div className="card-body">
+						<div className="card-body1">
 
             <table>
 							<thead>
