@@ -75,7 +75,7 @@ const NavBar = () => {
 				Logout
 			</Link>
 
-			<Link to="/dashboard" className="navbar__item">
+			<Link to="/dashboard/profile" className="navbar__item">
 				Hello, {value}
 			</Link>
 		</>

@@ -1,18 +1,21 @@
-import "./Dashboard.css"
-import React, { Fragment, useState } from "react"
-import { Button, ButtonGroup } from "react-bootstrap"
+import React, { useState, Fragment, useEffect } from "react"
+import "./dashboard-component/Dashboard.css"
+import DashboardProfile from "./dashboard-component/layouts/Dashboard-profile"
+import DashboardSell from "./dashboard-component/layouts/Dashboard-sell"
+import DashboardBid from "./dashboard-component/layouts/Dashboard-bid"
+import DashboardWin from "./dashboard-component/layouts/Dashboard-win"
+import { setSideBarVisibility } from "../redux/features/layoutSlice"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom';
 
-import DashboardProfile from "./layouts/Dashboard-profile"
-import DashboardSell from "./layouts/Dashboard-sell"
-import DashboardBid from "./layouts/Dashboard-bid"
-import DashboardWin from "./layouts/Dashboard-win"
+function DashboardSidebar() {
 
+	const dispatch = useDispatch()
+    dispatch(setSideBarVisibility(false))
 
-function Dashboard(props) {
-	const [selectedSection, setSelectedSection] = useState("profile")
     const navigate = useNavigate();
-
+	const [selectedSection, setSelectedSection] = useState("profile")	
+	
 	const handleProfileSelection = () => {
 		setSelectedSection("profile")
 	}
@@ -35,10 +38,6 @@ function Dashboard(props) {
 	const win = <DashboardWin />
 
 	return (
-		<div>
-		<Fragment>
-		<ButtonGroup aria-label="Basic example">
-
 		<table className="table-dashboard">
 			<thead>
 				<tr>
@@ -47,7 +46,7 @@ function Dashboard(props) {
 						<ul class="menu">
 						<li><a  onClick={handleProfileSelection}>Profile</a></li>
 						<li><a onClick={handleSellSelection}>Sell</a></li>
-						<li><a onClick={handleBidSelection}>Bid</a></li>
+						<li><a nClick={handleBidSelection}>Bid</a></li>
 						<li><a onClick={handleWinSelection}>Win</a></li>
 						</ul>
 					</body>
@@ -57,17 +56,15 @@ function Dashboard(props) {
 						<div>
 							{(selectedSection === "profile" && profile) ||
 								(selectedSection === "sell" && sell) ||
-								(selectedSection === "bid" && bid) }
-								{/* // (selectedSection === "win" && win)} */}
+								(selectedSection === "bid" && bid) ||
+								(selectedSection === "win" && win)}
 						</div>
 					</td>
 				</tr>
 			</thead>
 		</table>
-		</ButtonGroup>
-		</Fragment>
-			</div>
 	)
+
 }
 
-export default Dashboard
+export default DashboardSidebar

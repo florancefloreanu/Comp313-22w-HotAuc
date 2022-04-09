@@ -41,40 +41,49 @@ function DashboardSell() {
   return (
     <div className="dashboard-sell">
       <Link to="/dashboard/bid/edit"> Go to post a new sell</Link>
-      <h3>My earning : $ {earning}</h3>
+      <h2>Selling</h2>
+      <h4>My earnings : <span class="stress">$ {earning}</span></h4>
       {items?.map((item) => {
         return (
 					<div className="card">
 						<div className="card-body">
-							{item.images.map((prop) => (
-								<img src={item.images[0].uri} alt="hotwheels image" />
-							))}
-							<p> </p>
-							<h2>{item.title}</h2>
-							<p>Brand: {item.brand}</p>
-							<p>Color: {item.color}</p>
-							<p>Description: {item.description}</p>
-							<p>Year: {item.year}</p>
-							<p>Current Price: {item.currentPrice}</p>
-              <p>Seller Id: {item.seller}</p>
-              <p>Current status:  
+
+            <table>
+							<thead>
+							<tr>
+								<td rowspan="2">
+									{item.images.map((prop) => (
+									<img src={item.images[0].uri} alt="hotwheels image" />
+								))}
+								</td>
+								<td className="title-col1">
+									{item.title}
+								</td>
+								<td rowspan="2" className="endtime-col">
+                <Moment date={item.endTime} format="MMM/DD/YYYY HH:mm"></Moment>
+								</td>
+                <td rowspan="2" className="price-col">
+									<p>$ {item.currentPrice}</p>
+								</td>
+								<td rowspan="2" className="paid-col">
                 {item.isPaid && (
-                  'Already paid'
+                  ' Paid'
                   )}
                 {!item.isPaid && (
-                  'not paid'
+                  ' Not paid'
                 )}
-              </p>
-							<p className="text">
-								End Date:
-								{
-									<Moment format="YYYY-MM-DD">{item.endTime}</Moment>
-								}
-							</p>
-							<p className="text">
-								End Time:
-								{ <Moment format="HH:mm">{item.endTime}</Moment>}
-							</p>
+								</td>
+							</tr>
+							<tr>
+              <td className="description-col">
+									<p>Color: {item.color}</p>
+									<p>Description: {item.description}</p>
+									<p>Year: {item.year}</p>
+								</td>
+							</tr>
+							</thead>
+						</table>
+
 						</div>
 					</div>
 				)

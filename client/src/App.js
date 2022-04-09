@@ -10,7 +10,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import { useSelector } from "react-redux";
 
-import Dashboard from "./components/dashboard-component/Dashboard";
+import DashboardProfile from "./components/dashboard-component/layouts/Dashboard-profile";
+import DashboardBid from "./components/dashboard-component/layouts/Dashboard-bid";
+import DashboardSell from "./components/dashboard-component/layouts/Dashboard-sell";
+import DashboardWin from "./components/dashboard-component/layouts/Dashboard-win";
 import "bootstrap/dist/css/bootstrap.min.css";
 import EditBid from "./components/edit-dashboard-component/edit-bid";
 import EditProfile from "./components/edit-dashboard-component/edit-profile";
@@ -20,6 +23,7 @@ import { LocalUser } from "./components/LocalUser";
 import { PrivateRoute } from "./PrivateRoute";
 import NoSidebar from "./components/NoSidebar";
 import ShowSidebar from "./components/ShowSidebar";
+import ShowDashboardSidebar from "./components/ShowDashboardSidebar";
 import AdminDashboard from "./components/admin-component/AdminDashboard";
 import BrandPieChart from "./components/admin-component/BrandPieChart";
 import OneSignal from "react-onesignal";
@@ -82,14 +86,104 @@ function App() {
                   </ShowSidebar>
                 }
               />
-              <Route
-                path="/dashboard"
+                 <Route
+                path="/dashboard/profile"
                 element={
                   <PrivateRoute>
                     <div className="dashboard">
-                    <NoSidebar>
-                      <Dashboard/>
-                    </NoSidebar>
+                    <table>
+                      <thead>
+                        <tr>
+                          <td className="dashboard-sidebar">
+                            <ShowDashboardSidebar/>
+                          </td>
+                          <td>
+                            <NoSidebar>
+                              <DashboardProfile/>
+                            </NoSidebar>
+                          </td>
+                        </tr>
+                      </thead>
+                    </table>
+                    </div>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+								path="/dashboard"
+								element={
+									<PrivateRoute>
+										<NoSidebar>
+											<DashboardProfile />
+										</NoSidebar>
+									</PrivateRoute>
+								}
+							/>
+              <Route
+                path="/dashboard/sell"
+                element={
+                  <PrivateRoute>
+                    <div className="dashboard">
+                    <table>
+                      <thead>
+                        <tr>
+                          <td className="dashboard-sidebar">
+                            <ShowDashboardSidebar/>
+                          </td>
+                          <td>
+                            <NoSidebar>
+                              <DashboardSell/>
+                            </NoSidebar>
+                          </td>
+                        </tr>
+                      </thead>
+                    </table>
+                    </div>
+                  </PrivateRoute>
+                }
+              />
+               <Route
+                path="/dashboard/bid"
+                element={
+                  <PrivateRoute>
+                    <div className="dashboard">
+                    <table>
+                      <thead>
+                        <tr>
+                          <td className="dashboard-sidebar">
+                            <ShowDashboardSidebar/>
+                          </td>
+                          <td>
+                            <NoSidebar>
+                              <DashboardBid/>
+                            </NoSidebar>
+                          </td>
+                        </tr>
+                      </thead>
+                    </table>
+                    </div>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/dashboard/win"
+                element={
+                  <PrivateRoute>
+                    <div className="dashboard">
+                    <table>
+                      <thead>
+                        <tr>
+                          <td className="dashboard-sidebar">
+                            <ShowDashboardSidebar/>
+                          </td>
+                          <td>
+                            <NoSidebar>
+                              <DashboardWin/>
+                            </NoSidebar>
+                          </td>
+                        </tr>
+                      </thead>
+                    </table>
                     </div>
                   </PrivateRoute>
                 }
