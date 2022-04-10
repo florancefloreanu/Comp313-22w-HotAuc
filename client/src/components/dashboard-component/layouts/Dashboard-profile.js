@@ -1,6 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import "../Dashboard.css"
 
 function DashboardProfile(){
 	const userEmail = useSelector(state => state.userInfor.user?.email)

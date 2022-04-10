@@ -36,6 +36,7 @@
     "negotiator": "^0.6.2",
     "npm": "^8.3.0",
     "react-bootstrap": "^2.0.2",
+    "react-paypal-express-checkout": "^1.0.5",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
