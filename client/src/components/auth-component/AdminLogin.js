@@ -40,7 +40,7 @@ function AdminLogin(props) {
 
 	useEffect(() => {
 		if (!!token && errors.length === 0) {
-			navigate("/")
+			navigate("/admin/dashboard/home")
 		}
 	}, [token, errors])
 
@@ -71,9 +71,7 @@ function AdminLogin(props) {
 						/>
 					</Form.Group>
 					<Form.Group className="d-flex">
-						{/* <Button variant="primary" type="button" onClick={login}>
-							Submit
-						</Button> */}
+	
 						<Button
 							variant="primary"
 							type="button"
