@@ -3,9 +3,9 @@
  * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
  * Created Date: Tuesday, March 29th 2022, 7:02:01 pm
  * Author: han
- * 
+ *
  * Copyright (c) 2022 HotAuc
- * 
+ *
  * Purpose: edit user in admin dashboard
  */
 
@@ -14,7 +14,7 @@ import axios from "axios"
 import { Button, Card, Col, Row, Form } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { useParams, Navigate, useNavigate } from "react-router-dom"
-import { async } from "@firebase/util"
+import { SERVER_URL } from "../../ConstantValue"
 
 function EditUser() {
 	const [user, setUser] = useState({
@@ -38,7 +38,7 @@ function EditUser() {
 
 				//Make request
 				const res = await axios.get(
-					`http://localhost:5000/api/admin/users/${userId}`,
+					`${SERVER_URL}admin/users/${userId}`,
 					config
 				)
 				setUser(res.data)
@@ -65,7 +65,7 @@ function EditUser() {
 
 			//Make request
 			const res = await axios.put(
-				`http://localhost:5000/api/admin/users/${userId}`,
+				`${SERVER_URL}admin/users/${userId}`,
 				user,
 				config
 			)

@@ -3,9 +3,9 @@
  * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
  * Created Date: Tuesday, March 29th 2022, 7:02:01 pm
  * Author: Han
- * 
+ *
  * Copyright (c) 2022 HotAuc
- * 
+ *
  * Purpose: All users in admin dashboard
  */
 
@@ -16,7 +16,7 @@ import { Table } from "react-bootstrap"
 import { Button, Card, Col, Row } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-
+import { SERVER_URL } from "../../ConstantValue"
 
 function AdminAllUsers() {
 	const [users, setUsers] = useState([])
@@ -38,10 +38,7 @@ function AdminAllUsers() {
 				}
 			}
 
-			const res = await axios.get(
-				`http://localhost:5000/api/admin/users`,
-				config
-			)
+			const res = await axios.get(`${SERVER_URL}admin/users`, config)
 			setUsers(res.data)
 			const total = Math.ceil(res.data.length / itemPerPage)
 			setTotalPage(total)

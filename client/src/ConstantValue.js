@@ -10,6 +10,9 @@
  */
 
 
-export const SERVER_URL = "http://localhost:5000/api/"
+export const SERVER_URL =
+	process.env.NODE_ENV === "production"
+		? "https://mighty-mesa-33042.herokuapp.com/api/"
+		: "http://localhost:5000/api/"
 export const LOGIN_INFO_EMPTY_ERROR = "Please fill all fields."
 export const LOGIN_MATCH = "match"

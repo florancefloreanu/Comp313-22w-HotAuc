@@ -3,9 +3,9 @@
  * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack\client
  * Created Date: Friday, April 1st 2022, 10:11:20 pm
  * Author: han
- * 
+ *
  * Copyright (c) 2022 HotAuc
- * 
+ *
  * Purpose: All items in admin dashboard
  */
 
@@ -16,6 +16,7 @@ import { Table } from "react-bootstrap"
 import { Button, Card, Col, Row } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { SERVER_URL } from "../../ConstantValue"
 
 function AdminAllItems() {
 	const [items, setitems] = useState([])
@@ -37,10 +38,7 @@ function AdminAllItems() {
 				}
 			}
 
-			const res = await axios.get(
-				`http://localhost:5000/api/admin/items`,
-				config
-			)
+			const res = await axios.get(`${SERVER_URL}admin/items`, config)
 			setitems(res.data)
 			const total = Math.ceil(res.data.length / itemPerPage)
 			setTotalPage(total)
