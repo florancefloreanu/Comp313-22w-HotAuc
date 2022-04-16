@@ -3,9 +3,9 @@
  * Path: f:\study\2022winter\comp313-project2\comp-231-hot-auc-full-stack
  * Created Date: Tuesday, March 29th 2022, 7:02:01 pm
  * Author: Han
- * 
+ *
  * Copyright (c) 2022 HotAuc
- * 
+ *
  * Porpose: Running server
  */
 
@@ -18,16 +18,13 @@ const connectDB = require("./config/db")
 const swaggerUi = require("swagger-ui-express")
 const swaggerDocument = require("./swagger.json")
 const cors = require("cors")
+const path = require("path")
 
 //Connect MongoDB
 connectDB()
 
 //Init middleware
 app.use(express.json({ extended: false }))
-
-app.get("/", (req, res) => {
-	res.send("API running")
-})
 
 //Handle cors
 
@@ -40,7 +37,6 @@ app.use("/api/auth", require("./routes/api/auth"))
 app.use("/api/user", require("./routes/api/user"))
 app.use("/api/item", require("./routes/api/item"))
 app.use("/api/admin", require("./routes/api/admin"))
-
 
 // Chatbot
 app.use("/api/dialogflow", require("./routes/api/dialogflow"))
@@ -57,9 +53,18 @@ app.use(function (req, res, next) {
 	next()
 })
 
+//serve static assets in production
+if (process.env.NODE_ENV === "production") {
+	//Set static folder
+	app.use(express.static("client/build"))
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+	})
+}
+
 const PORT = process.env.PORT || 5000
 
 server.listen(PORT, () => {
 	console.log(`Port listening on ${PORT}`)
 })
-
