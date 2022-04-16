@@ -14,7 +14,7 @@ import axios from "axios"
 import { Button, Card, Col, Row, Form } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { useParams, Navigate, useNavigate } from "react-router-dom"
-import { SERVER_URL } from "../../ConstantValue"
+import { SERVER_URL } from "../../../ConstantValue"
 
 function EditUser() {
 	const [user, setUser] = useState({

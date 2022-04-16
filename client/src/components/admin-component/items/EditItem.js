@@ -9,7 +9,7 @@
  * Purpose: Edit item page in admin dashboard
  *
  */
-import { SERVER_URL } from "../../ConstantValue"
+import { SERVER_URL } from "../../../ConstantValue"
 import React, { Component, useEffect, useState } from "react"
 import axios from "axios"
 import { Button, Card, Col, Row, Form } from "react-bootstrap"

@@ -16,7 +16,7 @@ import { Table } from "react-bootstrap"
 import { Button, Card, Col, Row } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { SERVER_URL } from "../../ConstantValue"
+import { SERVER_URL } from "../../../ConstantValue"
 
 function AdminAllItems() {
 	const [items, setitems] = useState([])
