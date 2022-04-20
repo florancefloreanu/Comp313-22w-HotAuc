@@ -20,7 +20,7 @@ import { saveMessage } from '../../redux/features/chatbotSlice';
 export default function Chatbot() {
   const dispatch = useDispatch();
   const reduxMessages = useSelector(state => state.chatbotMessage.messages);
-  const BASE_URL = "http://localhost:3000/";
+  const BASE_URL = "https://mighty-mesa-33042.herokuapp.com/"
 
   useEffect(() => {
     if (reduxMessages.length < 1) {
