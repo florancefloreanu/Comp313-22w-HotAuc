@@ -137,7 +137,7 @@ const NavBar = () => {
 				Contact Us
 			</a>
 			{!value && (guestLink)}
-			{value && (!role || role === 'user') && (userLink)}
+			{value && (!role || role === 'user' ||role === "undefined") && (userLink)}
 			{value&&role==='admin'&&(adminLink)}
 		</header>
 	)
